@@ -1,5 +1,5 @@
 source 'http://gems.ruby-china.org'
-#ruby '2.2.3'
+ruby '2.2.3'
 gem 'rails', '4.2.7.1'
 gem 'ruby-oci8','~> 2.2.0.2'
 gem 'activerecord-oracle_enhanced-adapter', '~> 1.6.0'
@@ -14,6 +14,7 @@ gem 'paperclip', '~> 4.3.0'
 gem 'kaminari'
 gem 'tzinfo'
 gem 'tzinfo-data'
+gem 'better_errors'
 #gem 'puma'
 
 # gem 'sass-rails', '~> 5.0'
@@ -25,9 +26,9 @@ gem 'tzinfo-data'
 # gem 'high_voltage'
 
 group :development do
-  gem 'better_errors'
+
   gem 'html2haml'
-  gem 'rails_layout'
+  # gem 'rails_layout'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   # gem 'spring'

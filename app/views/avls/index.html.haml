@@ -1,0 +1,42 @@
+%h5
+  = link_to 'New Avl', new_avl_path
+  .tab-1
+  = link_to 'Create Via Excel', create_via_excel_avls_url
+
+- if @avls.present?
+  .col-xs-12
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          .pull-left
+            查詢結果 Listing
+          .pull-right
+            <a download="report.xls" href="#" onclick="return ExcellentExport.excel(this, 'rpt', 'Sheet');">Excel</a>
+
+          .clearfix
+    .table-responsive
+      %table.table.small.table-bordered.table-condensed#rpt
+        %thead
+          %tr
+            %th
+            %th= t('attributes.werks')
+            %th= t('attributes.lifnr')
+            %th= t('attributes.matkl')
+            %th= t('attributes.email')
+            %th= t('attributes.resp')
+
+        %tbody
+          - @avls.each do |avl|
+            %tr
+              %td
+                = link_to t('edit'), edit_avl_path(avl)
+                |
+                = link_to t('destroy'), avl, :method => :delete, :data => { :confirm => t('confirm')}
+              %td= avl.werks
+              %td= avl.lifnr
+              %td= avl.matkl
+              %td= avl.email
+              %td= avl.resp
+
+
+

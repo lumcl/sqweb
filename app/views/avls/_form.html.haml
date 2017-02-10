@@ -1,0 +1,13 @@
+= simple_form_for(@avl) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :uuid
+    = f.input :werks
+    = f.input :lifnr
+    = f.input :matkl
+    = f.input :email
+    = f.input :resp
+
+  .form-actions
+    = f.button :submit

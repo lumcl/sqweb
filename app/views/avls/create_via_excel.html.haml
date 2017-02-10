@@ -1,0 +1,20 @@
+.col-xs-12
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        paste excel info
+    .panel-body
+      = form_tag(update_via_excel_avls_url, method: 'post') do
+
+        .form-group.col-xs-12
+          %label{for: 'avls'}AVL 資料
+          .text-muted
+            請不要把表頭粘貼在文本框內
+          = text_area_tag 'avls', nil, rows: 10, class: 'form-control',
+             placeholder: '工廠	供應商 物料組 郵件 負責人'
+
+        .form-group.col-xs-12
+          = render 'layouts/submit_button'
+
+
+

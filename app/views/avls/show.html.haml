@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Uuid:
+  = @avl.uuid
+%p
+  %b Werks:
+  = @avl.werks
+%p
+  %b Lifnr:
+  = @avl.lifnr
+%p
+  %b Matkl:
+  = @avl.matkl
+%p
+  %b Email:
+  = @avl.email
+%p
+  %b Resp:
+  = @avl.resp
+
+= link_to 'Edit', edit_avl_path(@avl)
+\|
+= link_to 'Back', avls_path

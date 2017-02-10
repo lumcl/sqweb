@@ -81,3 +81,10 @@ en:
     zieba003: '欄位說明'
     ziebc001: '欄位說明'
     ziebr005: '欄位說明'
+
+    uuid: 'id'
+    werks: '工廠'
+    lifnr: '供應商'
+    matkl: '物料組'
+    email: '郵件'
+    resp: '負責人'

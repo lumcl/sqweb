@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  resources :avls do
+    get :create_via_excel, on: :collection
+    post :update_via_excel, on: :collection
+  end
+
+
   resources :maras
 
   resources :burnins do
