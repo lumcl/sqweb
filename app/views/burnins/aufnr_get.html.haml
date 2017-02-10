@@ -1,0 +1,65 @@
+.col-xs-12
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        .pull-left
+          輸入工單信息 Key in MO info
+        .pull-right
+          = link_to '目錄 Menu', menu_burnins_url
+        .clearfix
+    .panel-body
+      = form_tag(aufnr_post_burnins_url, method: 'post') do
+        .form-group.has-error.col-xs-12.col-sm-6
+          %label{for: 'aufnr'}工單號 Mfg Ord#
+          = text_field_tag 'aufnr', session[:aufnr], class: 'form-control'
+        .form-group.col-xs-12.col-sm-6
+          %label{for: 'matnr'}機種 Product#
+          = text_field_tag 'matnr', session[:matnr], class: 'form-control', readonly: true
+        .form-group.col-xs-12.col-md-6
+          %label{for: 'kunnr'}客戶 Customer
+          = text_field_tag 'kunnr', session[:kunnr], class: 'form-control'
+        .form-group.col-xs-6.col-md-3
+          %label{for: 'pwerk'}工廠 Plant
+          = text_field_tag 'pwerk', session[:pwerk], class: 'form-control', readonly: true
+        .form-group.col-xs-6.col-md-3
+          %label{for: 'psmng'}數量 Qty
+          = text_field_tag 'psmng', session[:psmng], class: 'form-control', readonly: true
+        .form-group.col-xs-6.col-md-3
+          %label{for: 'budat'}日期 Date
+          = text_field_tag 'budat', session[:budat] || Time.now.strftime('%Y%m%d'), class: 'form-control'
+        .form-group.has-error.col-xs-6.col-md-3
+          %label{for: 'burnline'}線別 Prd line
+          = text_field_tag 'burnline', session[:burnline], class: 'form-control'
+        .form-group.has-error.col-xs-6.col-md-3
+          %label{for: 'btime'}小時 Duration
+          = text_field_tag 'btime', session[:btime], class: 'form-control'
+        .form-group.has-error.col-xs-6.col-md-3
+          %label{for: 'bvolt'}電壓 Voltage
+          = text_field_tag 'bvolt', session[:bvolt], class: 'form-control'
+        .form-group.has-error.col-xs-6.col-md-3
+          %label{for: 'bload'}負載 Loading
+          = text_field_tag 'bload', session[:bload], class: 'form-control'
+        .form-group.has-error.col-xs-6.col-md-3
+          %label{for: 'btemp'}溫度 TEMP.
+          = text_field_tag 'btemp', session[:btemp], class: 'form-control'
+        .clearfix
+
+        .form-group.col-xs-12
+          = render 'layouts/qrcode_button'
+
+:javascript
+  $(document).ready(function () {
+    if ($('#aufnr').val() == ''){
+      $('#submit-button').hide();
+    }
+
+    $('#aufnr').focus();
+
+    $('#aufnr').change(function(){
+      $.ajax({
+        url: '/burnins/aufnr_ajax',
+        data: {aufnr: $('#aufnr').val()}
+      })
+    });
+
+  })

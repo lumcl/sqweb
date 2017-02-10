@@ -1,0 +1,9 @@
+= simple_form_for(@systab) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :objkey
+    = f.input :objval
+
+  .form-actions
+    = f.button :submit

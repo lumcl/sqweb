@@ -1,0 +1,28 @@
+= simple_form_for(@burnin) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :uuid
+    = f.input :qrcode
+    = f.input :aufnr
+    = f.input :burnline
+    = f.input :matnr
+    = f.input :kunnr
+    = f.input :budat
+    = f.input :psmng
+    = f.input :btime
+    = f.input :bvolt
+    = f.input :bload
+    = f.input :btemp
+    = f.input :strtime
+    = f.input :endtime
+    = f.input :struser
+    = f.input :enduser
+    = f.input :difftime
+    = f.input :result
+    = f.input :packline
+    = f.input :packtime
+    = f.input :packuser
+
+  .form-actions
+    = f.button :submit

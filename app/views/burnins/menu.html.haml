@@ -1,0 +1,11 @@
+.container
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        燒機目錄 Burnin Menu
+    .panel-body
+      .list-group
+        = link_to '上架 Up shelf', aufnr_get_burnins_url, class:'list-group-item'
+        = link_to '下架 Off shelf', end_get_burnins_url, class:'list-group-item'
+        = link_to '包裝 Packing', pack_get_burnins_url, class:'list-group-item'
+        = link_to '查詢 Enquiry', burnins_url, class:'list-group-item'

@@ -1,0 +1,97 @@
+.col-xs-12
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        .pull-left
+          查詢 Enquiry
+        .pull-right
+          = link_to '目錄 Menu', menu_burnins_url
+        .clearfix
+    .panel-body
+      = form_tag(burnins_url, method: 'get') do
+        = hidden_field_tag 'sbm', 'X'
+        .form-group.col-xs-12.col-sm-4
+          %label{for: 'aufnr'}工單號 Mfg Ord#
+          = text_field_tag 'aufnr', params[:aufnr], class: 'form-control'
+        .form-group.col-xs-12.col-sm-4
+          %label{for: 'matnr'}機種 Product#
+          = text_field_tag 'matnr', params[:matnr], class: 'form-control'
+        .form-group.col-xs-12.col-sm-4
+          %label{for: 'kunnr'}客戶 Customer
+          = text_field_tag 'kunnr', params[:kunnr], class: 'form-control'
+        .form-group.col-xs-12.col-sm-6
+          %label{for: 'qrcode_str'} 條碼起 Barcode Start
+          = text_field_tag 'qrcode_str', params[:qrcode_str], class: 'form-control'
+        .form-group.col-xs-12.col-sm-6
+          %label{for: 'qrcode_end'} 條碼至 Barcode End
+          = text_field_tag 'qrcode_end', params[:qrcode_end], class: 'form-control'
+
+        .form-group.col-xs-12
+          = render 'layouts/submit_button'
+
+- if @burnins.present?
+  .col-xs-12
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          .pull-left
+            查詢結果 Listing
+          .pull-right
+            <a download="report.xls" href="#" onclick="return ExcellentExport.excel(this, 'rpt', 'Sheet');">Excel</a>
+
+          .clearfix
+    .table-responsive
+      %table.table.small.table-bordered.table-condensed#rpt
+        %thead
+          %tr
+            %th 工單
+            %th 機種
+            %th 數量
+            %th 線別
+            %th 二維碼
+            %th 上架時間
+            %th 下架時間
+            %th 電壓
+            %th 負載
+            %th 溫度
+            %th 標準小時
+            %th 判定
+            %th 包裝時間
+          %tr
+            %th MO
+            %th Product
+            %th Qty
+            %th Prd Line
+            %th Barcode
+            %th Str Time
+            %th End Time
+            %th Voltage
+            %th Loading
+            %th Temp.
+            %th Std Hrs
+            %th Result
+            %th Pack Time
+        %tbody
+          - @burnins.each do |row|
+            %tr
+              %td= row.aufnr
+              %td= row.matnr
+              %td.text-right
+                = number_with_precision(row.psmng, precision: 12, significant: true, strip_insignificant_zeros: true, delimiter: ',')
+              %td= row.burnline
+              %td= row.qrcode
+              %td= row.strtime.present? ? row.strtime.strftime('%Y%m%d %H:%M:%S') : ''
+              %td= row.endtime.present? ? row.endtime.strftime('%Y%m%d %H:%M:%S') : ''
+              %td.text-right
+                = number_with_precision(row.bvolt, precision: 12, significant: true, strip_insignificant_zeros: true, delimiter: ',')
+              %td.text-right
+                = number_with_precision(row.bload, precision: 12, significant: true, strip_insignificant_zeros: true, delimiter: ',')
+              %td.text-right
+                = number_with_precision(row.btemp, precision: 12, significant: true, strip_insignificant_zeros: true, delimiter: ',')
+              %td.text-right
+                = number_with_precision(row.btime, precision: 12, significant: true, strip_insignificant_zeros: true, delimiter: ',')
+              %td= row.result
+              %td= row.packtime.present? ? row.packtime.strftime('%Y%m%d %H:%M:%S') : ''
+
+
+

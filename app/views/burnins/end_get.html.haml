@@ -1,0 +1,86 @@
+.col-xs-12
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        .pull-left
+          下架掃瞄 Finish burnin
+        .pull-right
+          = link_to '目錄 Menu', menu_burnins_url
+        .clearfix
+    .panel-body
+      .form-group.col-xs-12
+        %label{for: 'aufnr'}工單號 MO
+        = text_field_tag 'aufnr','', class: 'form-control'
+        %table.table.small.table-bordered.table-condensed
+          %tbody
+            %tr
+              %td 機種 PRD
+              %td#matnr
+            %tr
+              %td 數量 QTY
+              %td#scanqty
+
+      .form-group.has-success.col-xs-12
+        %label{for: 'qrcode'}條碼 Barcode
+        = text_field_tag 'qrcode','', class: 'form-control'
+
+      .small
+        NRC=沒記錄(No Rcd), OK=合格(Pass), NG=不良(Fail), ERR=錯誤(Error)
+    %table.table.small.table-bordered.table-condensed
+      %caption
+      %thead
+        %tr
+          %th 條碼 Barcode
+          %th Time
+          %th Sts
+      %tbody#status_tbody
+
+:javascript
+
+  var rowCounter = 0;
+  function addcol(qrcode){
+    rowCounter += 1;
+    str = "<tr><td>"+qrcode+"</td><td id='t"+rowCounter+"'></td><td id='s"+rowCounter+"'>***</td></tr>"
+    $('#status_tbody').prepend(str);
+    if (rowCounter > 20){
+      $('tr').last().remove();
+    }
+  }
+
+  function pad(str, max) {
+    str = str.toString();
+    return str.length < max ? pad("0" + str, max) : str;
+  }
+
+  function summary(){
+    $.ajax({
+      url: '/burnins/summary_ajax',
+      data: {
+        aufnr:$('#aufnr').val()
+      }
+    })
+  }
+
+  $(document).ready(function() {
+
+    $('#aufnr').change(function(){
+      $('#aufnr').val(pad($('#aufnr').val(),12));
+      summary();
+    });
+
+    $('#qrcode').change(function(){
+      addcol($('#qrcode').val());
+      $.ajax({
+        url: '/burnins/end_ajax',
+        data: {
+          qrcode: $('#qrcode').val(),
+          aufnr:$('#aufnr').val(),
+          rowcounter: rowCounter
+        }
+      })
+      $('#qrcode').val('');
+      $('#qrcode').focus();
+      summary();
+    });
+    setTimeout(function(){$('#aufnr').focus();},0);
+  });

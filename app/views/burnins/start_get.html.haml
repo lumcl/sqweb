@@ -1,0 +1,69 @@
+.col-xs-12
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        .pull-left
+          上架掃瞄 Start Burnin
+        .pull-right
+          = link_to '目錄 Menu', menu_burnins_url
+        .clearfix
+    .panel-body
+      .col-xs-12
+        %table.table.small.table-bordered.table-condensed
+          %tbody
+            %tr
+              %td 工單 MO
+              %td
+                = link_to session[:aufnr], aufnr_get_burnins_url
+                = link_to '', aufnr_get_burnins_url, class: 'glyphicon glyphicon-pencil'
+            %tr
+              %td 機種 PRD
+              %td= session[:matnr]
+            %tr
+              %td 數量 QTY
+              %td#scanqty= "#{@cnt} / #{session[:psmng]}"
+
+      .form-group.has-success.col-xs-12
+        %label{for: 'qrcode'}條碼 Barcode
+        = text_field_tag 'qrcode','', class: 'form-control'
+
+      .col-xs-12
+        OK:保存(Save), DUP:重複(Duplicate), ***:等待(Wait)
+
+      .col-xs-12
+        %table.table.small.table-bordered.table-condensed
+          %thead
+            %tr
+              %th 條碼 Barcode
+              %th Sts
+          %tbody#status_tbody
+
+:javascript
+
+  var rowCounter = 0;
+  function addcol(qrcode){
+    rowCounter += 1;
+    str = "<tr><td>"+qrcode+"</td><td id='"+rowCounter+"'>***</td></tr>"
+    $('#status_tbody').prepend(str);
+    if (rowCounter > 20){
+      $('tr').last().remove();
+    }
+  }
+
+  $(document).ready(function() {
+
+    $('#qrcode').change(function(){
+      addcol($('#qrcode').val());
+      $.ajax({
+        url: '/burnins/start_ajax',
+        data: {qrcode: $('#qrcode').val(), rowcounter: rowCounter}
+      })
+      $('#qrcode').val('');
+      $('#qrcode').focus();
+    });
+    setTimeout(function(){$('#qrcode').focus();},0);
+  });
+
+
+
+

@@ -1,0 +1,15 @@
+- if user_signed_in?
+  %li.dropdown
+    %a.dropdown-toggle{data: {toggle: "dropdown"}, href: "#"}
+      掃瞄
+      %b.caret
+    %ul.dropdown-menu
+      %li= link_to '燒機 Burn in', menu_burnins_url
+
+
+- if user_signed_in?
+  %li= link_to '登出', destroy_user_session_path, :method=>'delete'
+  %li= link_to current_user.email, '#'
+
+
+

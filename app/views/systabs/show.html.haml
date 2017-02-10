@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Objkey:
+  = @systab.objkey
+%p
+  %b Objval:
+  = @systab.objval
+
+= link_to 'Edit', edit_systab_path(@systab)
+\|
+= link_to 'Back', systabs_path

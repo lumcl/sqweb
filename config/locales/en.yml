@@ -1,0 +1,83 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  saving: '保存中..'
+  action: '動作'
+  submit: '提交'
+  show: '檢視'
+  edit: '編輯'
+  destroy: '刪除'
+  confirm: '請確定!'
+  new: '新增'
+  search: '查找'
+  back: '返回'
+  upload: '上傳'
+  upload_success: '上傳成功'
+
+  attributes:
+    aufnr: '工單'
+    bnarea: '保稅範圍'
+    bom: '欄位說明'
+    bom_id: '記錄ID'
+    bom_line: '欄位說明'
+    bukrs: '公司'
+    cbseq: '歸併序號'
+    cbsta: '備案狀態'
+    cbtyp: '歸併類型'
+    cmatnr: '物料'
+    connr: '手冊號'
+    connr: '記錄ID'
+    creator: '創建者'
+    cwerks: '工廠'
+    declare: '申報'
+    deuom: '申報'
+    dlrat: '轉換率'
+    dlseq: '備案序號'
+    fsrat: '第一單位比例'
+    fsuom: '法定第一單位'
+    gewei: '單位'
+    hscode: '商品編碼'
+    hstxt: '中文品名'
+    maktx: '說明'
+    mara: '欄位說明'
+    matkl: '料類'
+    matnr: '料號'
+    meins: '單位'
+    menge: '耗用'
+    menge_std: '耗用'
+    mtart: '類別'
+    ntgew: '淨重'
+    pmatnr: '機種'
+    remark: '備註'
+    rstat: '備案狀態'
+    scrat: '第二單位比例'
+    smode: '規格型號'
+    status: '狀態'
+    updater: '更新者'
+    uuid: '記錄ID'
+    vernr: '版本'
+    waste: '損耗'
+    waste_std: '損耗'
+    werks: '工廠'
+    zieba003: '欄位說明'
+    ziebc001: '欄位說明'
+    ziebr005: '欄位說明'

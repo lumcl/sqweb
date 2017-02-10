@@ -1,0 +1,22 @@
+
+%h5
+  = link_to "新增", "#"
+  = link_to "修改", "#"
+
+.panel.panel-default
+  .panel-heading
+    .panel-title
+      物料清单
+  .table-responsive
+    %table.table.small.table-hover.table-bordered.table-condensed#table_id
+      %thead
+        %tr
+          %th 料号
+          %th 重量
+      %tbody
+        - @maras.each do |mara|
+          %tr
+            %td= mara.matnr
+            %td= mara.brgew
+
+= paginate @maras unless @maras.empty?

@@ -1,0 +1,23 @@
+%h1 Listing systabs
+
+%table
+  %thead
+    %tr
+      %th Objkey
+      %th Objval
+      %th
+      %th
+      %th
+
+  %tbody
+    - @systabs.each do |systab|
+      %tr
+        %td= systab.objkey
+        %td= systab.objval
+        %td= link_to 'Show', systab
+        %td= link_to 'Edit', edit_systab_path(systab)
+        %td= link_to 'Destroy', systab, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Systab', new_systab_path

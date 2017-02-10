@@ -1,0 +1,58 @@
+.row
+  .col-xs-6
+    %a.anchor{name: 'direct_import'}
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          = '直接進口 - 從IEB到易關通'
+      .panel-body
+        = form_tag(direct_import_uploads_url, method: 'get') do
+          .form-inputs
+            = text_area_tag 'impnr', '', class: 'form-control', placeholder: '進口號碼', size: '25x5'
+          %br
+            = render 'layouts/submit_button'
+
+  .col-xs-6
+    %a.anchor{name: 'direct_export'}
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          = '直接出口 - 從SAP到易關通'
+      .panel-body
+        = form_tag(direct_export_uploads_url, method: 'get') do
+          .form-inputs
+            = text_area_tag 'vbeln', '', class: 'form-control', placeholder: 'DN號碼', size: '25x5'
+          %br
+            = text_field_tag 'expnr', '', class: 'form-control', placeholder: '自訂編號'
+          = render 'layouts/submit_button'
+
+%hr.hr-lite
+%h3 一般貿易交易
+.row
+  .col-xs-6
+    %a.anchor{name: 'general_import'}
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          = '一般貿易進口 - 從ebooking到易關通'
+      .panel-body
+        = form_tag(general_import_uploads_url, method: 'get') do
+          .form-inputs
+            = text_area_tag 'impnr', '', class: 'form-control', placeholder: 'ebooking號碼', size: '25x5'
+          %br
+            = text_field_tag 'refno', '', class: 'form-control', placeholder: '自訂編號'
+          = render 'layouts/submit_button'
+
+  .col-xs-6
+    %a.anchor{name: 'general_export'}
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          = '一般貿易出口 - 從SAP到易關通'
+      .panel-body
+        = form_tag(general_export_uploads_url, method: 'get') do
+          .form-inputs
+            = text_area_tag 'vbeln', '', class: 'form-control', placeholder: 'DN號碼', size: '25x5'
+          %br
+            = text_field_tag 'expnr', '', class: 'form-control', placeholder: '自訂編號'
+          = render 'layouts/submit_button'

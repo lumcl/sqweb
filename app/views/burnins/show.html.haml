@@ -1,0 +1,69 @@
+%p#notice= notice
+
+%p
+  %b Uuid:
+  = @burnin.uuid
+%p
+  %b Qrcode:
+  = @burnin.qrcode
+%p
+  %b Aufnr:
+  = @burnin.aufnr
+%p
+  %b Burnline:
+  = @burnin.burnline
+%p
+  %b Matnr:
+  = @burnin.matnr
+%p
+  %b Kunnr:
+  = @burnin.kunnr
+%p
+  %b Budat:
+  = @burnin.budat
+%p
+  %b Psmng:
+  = @burnin.psmng
+%p
+  %b Btime:
+  = @burnin.btime
+%p
+  %b Bvolt:
+  = @burnin.bvolt
+%p
+  %b Bload:
+  = @burnin.bload
+%p
+  %b Btemp:
+  = @burnin.btemp
+%p
+  %b Strtime:
+  = @burnin.strtime
+%p
+  %b Endtime:
+  = @burnin.endtime
+%p
+  %b Struser:
+  = @burnin.struser
+%p
+  %b Enduser:
+  = @burnin.enduser
+%p
+  %b Difftime:
+  = @burnin.difftime
+%p
+  %b Result:
+  = @burnin.result
+%p
+  %b Packline:
+  = @burnin.packline
+%p
+  %b Packtime:
+  = @burnin.packtime
+%p
+  %b Packuser:
+  = @burnin.packuser
+
+= link_to 'Edit', edit_burnin_path(@burnin)
+\|
+= link_to 'Back', burnins_path
