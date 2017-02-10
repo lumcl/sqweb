@@ -32,6 +32,9 @@ en:
   back: '返回'
   upload: '上傳'
   upload_success: '上傳成功'
+  lifnr_err: '供應商代號錯誤'
+  werks_err: '工廠代號錯誤'
+  matkl_err: '物料組錯誤'
 
   attributes:
     aufnr: '工單'
@@ -88,3 +91,4 @@ en:
     matkl: '物料組'
     email: '郵件'
     resp: '負責人'
+    error_msg: '錯誤信息'

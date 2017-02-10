@@ -51,8 +51,10 @@ class AvlsController < ApplicationController
 
   def update_via_excel
     # 工廠	供應商	物料組	郵件	負責人
-    Avl.create_via_excel(text_area_to_array(params[:avls]))
-    redirect_to avls_url
+    @error_logs = Avl.create_via_excel(text_area_to_array(params[:avls]))
+    if @error_logs.blank?
+      redirect_to avls_url, notice: t('upload_success')
+    end
   end
 
   private
