@@ -8,8 +8,7 @@
           .pull-left
             查詢結果 Listing
           .pull-right
-            <a download="report.xls" href="#" onclick="return ExcellentExport.excel(this, 'rpt', 'Sheet');">Excel</a>
-
+            = export_to_excel('rpt')
           .clearfix
     .table-responsive
       %table.table.small.table-bordered.table-condensed#rpt
@@ -21,8 +20,8 @@
             %th= t('attributes.matkl')
             %th= t('attributes.email')
             %th= t('attributes.resp')
-
         %tbody
+          = render 'layouts/excel_number_format'
           - @avls.each do |avl|
             %tr
               %td
@@ -31,7 +30,8 @@
                 = link_to t('destroy'), avl, :method => :delete, :data => { :confirm => t('confirm')}
               %td= avl.werks
               %td= avl.lifnr
-              %td= avl.matkl
+              =# %td{style:'mso-number-format:"\@"'}= avl.matkl
+              %td.excel-text= avl.matkl
               %td= avl.email
               %td= avl.resp
 
