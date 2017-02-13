@@ -16,12 +16,21 @@ class Avl < ActiveRecord::Base
         hash[:matkl] = buf[2]
         hash[:email] = buf[3]
         hash[:resp] = buf[4]
+        hash[:uuid] = buf[5]
         avls.append(hash)
       end
     end
     error_logs = []
     avls.each do |avl|
-      obj = Avl.create(avl)
+      if avl[:uuid].blank?
+        obj = Avl.create(avl)
+      elsif avl[:werks].blank? or avl[:lifnr].blank? or avl[:matkl].blank?
+        obj = Avl.find(avl[:uuid])
+        obj.destroy
+      else
+        obj = Avl.find(avl[:uuid])
+        obj.update_attributes(avl)
+      end
       if obj.errors.present?
         avl[:msg] = obj.errors.messages
         error_logs.append(avl)

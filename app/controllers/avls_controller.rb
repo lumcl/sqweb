@@ -3,7 +3,18 @@ class AvlsController < ApplicationController
 
   # GET /avls
   def index
-    @avls = Avl.all
+    @avls = []
+    if params[:sbm].present? #must be form submit
+      if params[:werks].present? or
+          params[:lifnr].present? or
+          params[:matkl].present?
+        @avls = Avl.where("werks like '%#{params[:werks].upcase}%'")
+                    .where("lifnr like '%#{params[:lifnr].upcase}%'")
+                    .where("matkl like '%#{params[:matkl].upcase}%'")
+                    .order(lifnr: :asc)
+                    .page(params[:page])
+      end
+    end
   end
 
   # GET /avls/1
