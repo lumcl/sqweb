@@ -1,0 +1,7 @@
+<% if @t023.blank? %>
+  alert("<%= I18n.translate('attributes.matkl') %>");
+  $('#req_ord_matkl').val('');
+  $('#req_ord_matkl').focus();
+<%  else %>
+  $('#req_ord_ord_date').val('<%= @t023.first.wgbez60 %>');
+<%  end %>

@@ -35,6 +35,9 @@ en:
   lifnr_err: '供應商代號錯誤'
   werks_err: '工廠代號錯誤'
   matkl_err: '物料組錯誤'
+  select_user_hint: '1個字符后會列出選項'
+  select_user_hint_3: '3個字符后會列出選項'
+  select_user_hint_2: '2個字符后會列出選項'
 
   attributes:
     aufnr: '工單'

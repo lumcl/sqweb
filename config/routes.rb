@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
 
+  resources :req_ords do
+    get :check_matkl, on: :collection
+  end
+
   resources :avls do
     get :create_via_excel, on: :collection
     post :update_via_excel, on: :collection
   end
 
+  resources :selects do
+    get :mat_grp, on: :collection
+  end
 
   resources :maras
 

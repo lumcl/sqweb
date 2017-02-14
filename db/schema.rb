@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210033543) do
+ActiveRecord::Schema.define(version: 20170214040905) do
 
   create_table "avl", id: false, force: :cascade do |t|
     t.string   "uuid",                     null: false
@@ -378,6 +378,39 @@ ActiveRecord::Schema.define(version: 20170210033543) do
     t.string  "meins",  limit: 27,  null: false
     t.string  "fabiao", limit: 144
   end
+
+  create_table "req_ord", id: false, force: :cascade do |t|
+    t.string   "uuid",                                      null: false
+    t.string   "vtweg",                                     null: false
+    t.string   "matkl",                                     null: false
+    t.string   "status",                                    null: false
+    t.string   "ord_no",                                    null: false
+    t.string   "ord_date",                                  null: false
+    t.datetime "due_at"
+    t.string   "ex_curr",                   default: "RMB", null: false
+    t.integer  "ex_rate",    precision: 38, default: 1,     null: false
+    t.string   "subject"
+    t.text     "remark"
+    t.string   "req_by",                                    null: false
+    t.text     "req_remark"
+    t.string   "sent_by"
+    t.datetime "sent_at"
+    t.string   "sent_ip"
+    t.datetime "reply_at"
+    t.integer  "sent_cnt",   precision: 38, default: 0,     null: false
+    t.integer  "reply_cnt",  precision: 38, default: 0,     null: false
+    t.string   "creator"
+    t.string   "updater"
+    t.string   "approver"
+    t.datetime "finish_at"
+    t.string   "werkss"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+  end
+
+  add_index "req_ord", ["matkl", "ord_date"], name: "i_req_ord_matkl_ord_date"
+  add_index "req_ord", ["ord_no"], name: "index_req_ord_on_ord_no", unique: true
+  add_index "req_ord", ["uuid"], name: "index_req_ord_on_uuid", unique: true
 
   create_table "systab", id: false, force: :cascade do |t|
     t.string   "objkey",     null: false
