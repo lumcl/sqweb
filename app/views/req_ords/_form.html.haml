@@ -1,0 +1,30 @@
+= simple_form_for(@req_ord) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :uuid
+    = f.input :matkl
+    = f.input :status
+    = f.input :ord_no
+    = f.input :ord_date
+    = f.input :due_at
+    = f.input :ex_curr
+    = f.input :ex_rate
+    = f.input :subject
+    = f.input :remark
+    = f.input :req_by
+    = f.input :req_remark
+    = f.input :sent_by
+    = f.input :sent_at
+    = f.input :sent_ip
+    = f.input :reply_at
+    = f.input :sent_cnt
+    = f.input :reply_cnt
+    = f.input :creator
+    = f.input :updater
+    = f.input :approver
+    = f.input :finish_at
+    = f.input :werkss
+
+  .form-actions
+    = f.button :submit

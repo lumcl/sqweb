@@ -1,0 +1,65 @@
+%h1 Listing req_ords
+
+%table
+  %thead
+    %tr
+      %th Uuid
+      %th Matkl
+      %th Status
+      %th Ord no
+      %th Ord date
+      %th Due at
+      %th Ex curr
+      %th Ex rate
+      %th Subject
+      %th Remark
+      %th Req by
+      %th Req remark
+      %th Sent by
+      %th Sent at
+      %th Sent ip
+      %th Reply at
+      %th Sent cnt
+      %th Reply cnt
+      %th Creator
+      %th Updater
+      %th Approver
+      %th Finish at
+      %th Werkss
+      %th
+      %th
+      %th
+
+  %tbody
+    - @req_ords.each do |req_ord|
+      %tr
+        %td= req_ord.uuid
+        %td= req_ord.matkl
+        %td= req_ord.status
+        %td= req_ord.ord_no
+        %td= req_ord.ord_date
+        %td= req_ord.due_at
+        %td= req_ord.ex_curr
+        %td= req_ord.ex_rate
+        %td= req_ord.subject
+        %td= req_ord.remark
+        %td= req_ord.req_by
+        %td= req_ord.req_remark
+        %td= req_ord.sent_by
+        %td= req_ord.sent_at
+        %td= req_ord.sent_ip
+        %td= req_ord.reply_at
+        %td= req_ord.sent_cnt
+        %td= req_ord.reply_cnt
+        %td= req_ord.creator
+        %td= req_ord.updater
+        %td= req_ord.approver
+        %td= req_ord.finish_at
+        %td= req_ord.werkss
+        %td= link_to 'Show', req_ord
+        %td= link_to 'Edit', edit_req_ord_path(req_ord)
+        %td= link_to 'Destroy', req_ord, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Req ord', new_req_ord_path

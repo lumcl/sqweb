@@ -1,0 +1,82 @@
+.col-xs-12
+  %h5
+    = link_to 'menu', '#'
+
+=# render 'form'
+
+.col-xs-12
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        新建報價需求訂單
+    .panel-body
+      = simple_form_for(@req_ord) do |f|
+        = f.error_notification
+
+        .form-inputs
+          .col-xs-6
+            = f.input :matgrp,
+              :label => t('attributes.matkl'),
+              :as => :autocomplete,
+              :source_query => mat_grp_selects_url,
+              :minLength => 2,
+              :items => 30,
+              :hint => t('select_user_hint_2')
+
+          .col-xs-6
+            = f.input :matkl
+
+          .col-xs-6
+            = f.input :ord_date
+        .row
+          .col-xs-12
+            = render 'layouts/submit_button'
+
+
+
+= link_to 'Back', req_ords_path
+
+:javascript
+  $(document).ready(function () {
+    $('#submit-button').hide();
+
+    // $.ajax({
+    //   url: '/ipqc/orders/get_aufnr',
+    //   data: {aufnr: $('#ipqc_order_aufnr').val()}
+    // })
+
+    $('#req_ord_ord_date').focus();
+
+    $('#req_ord_matkl').change(function(){
+      $.ajax({
+        url: '/req_ords/check_matkl',
+        data: {matkl: $('#req_ord_matkl').val()}
+      })
+    });
+
+    $('#ipqc_order_mline').change(function(){
+      $.ajax({
+        url: '/ipqc/orders/get_supervisor',
+        data: {id: $('#ipqc_order_mline_id').val()}
+      })
+    });
+
+    // $('#ipqc_order_mline').blur(function(){
+    //   $.ajax({
+    //     url: '/ipqc/orders/check_mline',
+    //     data: {id: $('#ipqc_order_mline_id').val()}
+    //   })
+    // });
+
+    $('#ipqc_order_reporter').focus(function(){
+      if ($('#ipqc_order_supervisor').val() == ''){
+        $('#ipqc_order_supervisor').focus();
+      }
+      else{
+        if ($('#ipqc_order_line_leader').val() == ''){
+          $('#ipqc_order_line_leader').focus();
+        }
+      }
+    });
+
+  })
