@@ -17,7 +17,7 @@ class Avl < ActiveRecord::Base
         hash[:email] = buf[3]
         hash[:resp] = buf[4]
         hash[:uuid] = buf[5]
-        avls.append(hash)
+        avls.append(hash) if hash[:werks].include?('A')
       end
     end
     error_logs = []

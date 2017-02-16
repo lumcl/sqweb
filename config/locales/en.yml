@@ -95,3 +95,12 @@ en:
     email: '郵件'
     resp: '負責人'
     error_msg: '錯誤信息'
+
+  views:
+    pagination:
+      first: "&laquo; 首頁"
+      last: "末頁 &raquo;"
+      previous: "&laquo; 上一頁"
+      next: "下一頁 &raquo;"
+      truncate: "..."
+      per: "每頁記錄數"
