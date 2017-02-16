@@ -1,6 +1,4 @@
-.col-xs-12
-  %h5
-    = link_to 'menu', '#'
+= render 'submenu'
 
 =# render 'form'
 
@@ -8,13 +6,13 @@
   .panel.panel-default
     .panel-heading
       .panel-title
-        新建報價需求訂單
+        = t('create_req_order')
     .panel-body
       = simple_form_for(@req_ord) do |f|
         = f.error_notification
 
         .form-inputs
-          .col-xs-6
+          .col-xs-12.col-sm-6
             = f.input :matgrp,
               :label => t('attributes.matkl'),
               :as => :autocomplete,
@@ -23,11 +21,31 @@
               :items => 30,
               :hint => t('select_user_hint_2')
 
-          .col-xs-6
-            = f.input :matkl
+          .col-xs-12.col-sm-6
+            = f.input :vtweg, collection: %w[DT TX TP JP], include_blank: false, hint: '報價區域'
 
-          .col-xs-6
-            = f.input :ord_date
+          .col-xs-12.col-sm-6
+            = f.input :ord_at
+
+          .col-xs-12.col-sm-6
+            = f.input :due_at
+
+          .col-xs-12.col-sm-6
+            = f.input :subject, as: :text
+
+          .col-xs-12.col-sm-6
+            = f.input :remark, as: :text
+
+          .col-xs-12.col-sm-6
+            = f.input :werkss, as: :check_boxes, collection: ENV['PLANT'].split(',')
+
+          .col-xs-12.col-sm-6
+            = f.input :req_remark, :hint => '這是內部使用說明.'
+
+          .col-xs-12.col-sm-6
+            = f.input :req_by
+
+
         .row
           .col-xs-12
             = render 'layouts/submit_button'
@@ -38,7 +56,7 @@
 
 :javascript
   $(document).ready(function () {
-    $('#submit-button').hide();
+    $('#submit-button').attr(disable: disable);
 
     // $.ajax({
     //   url: '/ipqc/orders/get_aufnr',

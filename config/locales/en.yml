@@ -38,6 +38,7 @@ en:
   select_user_hint: '1個字符后會列出選項'
   select_user_hint_3: '3個字符后會列出選項'
   select_user_hint_2: '2個字符后會列出選項'
+  create_req_order: '新建報價需求訂單'
 
   attributes:
     aufnr: '工單'
@@ -95,6 +96,29 @@ en:
     email: '郵件'
     resp: '負責人'
     error_msg: '錯誤信息'
+    req_ord: '報價需求'
+    status: '狀態'
+    ord_no: '訂單號碼'
+    ord_at: '訂單時間'
+    due_at: '截止時間'
+    ex_curr: '轉換幣別'
+    ex_rate: '匯率轉換'
+    subject: '簡短摘要'
+    remark: '訂單說明'
+    req_by: '需求者'
+    req_remark: '需求者說明'
+    sent_by: '送出者'
+    sent_at: '送出時間'
+    sent_ip: '送出IP'
+    reply_at: '接受時間'
+    sent_cnt: '送出計數'
+    reply_cnt: '回復計數'
+    creator: '建立者'
+    updater: '更新者'
+    approver: '核准者'
+    finish_at: '完成時間'
+    werkss: '工廠'
+    vtweg: '區域'
 
   views:
     pagination:

@@ -1,4 +1,6 @@
 - if user_signed_in?
+  %li= link_to 'AVL', avls_url
+  %li= link_to t('attributes.req_ord'), req_ords_url
   %li.dropdown
     %a.dropdown-toggle{data: {toggle: "dropdown"}, href: "#"}
       掃瞄

@@ -13,6 +13,15 @@ class ReqOrdsController < ApplicationController
   # GET /req_ords/new
   def new
     @req_ord = ReqOrd.new
+    @req_ord.req_by = current_user.email
+    @req_ord.ord_at = Date.current.to_time
+    @req_ord.due_at = Date.current.to_time.noon + 7.days
+    @req_ord.vtweg = case request.ip[0..5]
+                       when '172.31' then 'DT'
+                       when '172.91' then 'TX'
+                       when '172.63' then 'PH'
+                       else 'TP'
+                     end
   end
 
   # GET /req_ords/1/edit
@@ -51,13 +60,13 @@ class ReqOrdsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_req_ord
-      @req_ord = ReqOrd.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_req_ord
+    @req_ord = ReqOrd.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def req_ord_params
-      params.require(:req_ord).permit(:uuid, :matkl, :status, :ord_no, :ord_date, :due_at, :ex_curr, :ex_rate, :subject, :remark, :req_by, :req_remark, :sent_by, :sent_at, :sent_ip, :reply_at, :sent_cnt, :reply_cnt, :creator, :updater, :approver, :finish_at, :werkss)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def req_ord_params
+    params.require(:req_ord).permit(:uuid, :matkl, :status, :ord_no, :ord_dt, :due_at, :ex_curr, :ex_rate, :subject, :remark, :req_by, :req_remark, :sent_by, :sent_at, :sent_ip, :reply_at, :sent_cnt, :reply_cnt, :creator, :updater, :approver, :finish_at, :werkss, :vtweg, :matgrp, :matgrp_id)
+  end
 end
