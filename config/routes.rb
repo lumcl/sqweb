@@ -1,7 +1,23 @@
 Rails.application.routes.draw do
 
+  resources :flows do
+    post :create_workflow, on: :collection
+  end
+
+  resources :fileracks
+  resources :req_ord_mats do
+    get 'ajax_matnr', on: :collection
+  end
+
+  resources :req_ord_sups
   resources :req_ords do
     get :check_matkl, on: :collection
+    get :new_avls, on: :member
+    post :create_avls, on: :collection
+    get :new_mats, on: :member
+    post :new_mats_part_2, on: :member
+    post :create_mats, on: :collection
+    get :start_workflow, on: :member
   end
 
   resources :avls do
@@ -11,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :selects do
     get :mat_grp, on: :collection
+    get :user, on: :collection
   end
 
   resources :maras

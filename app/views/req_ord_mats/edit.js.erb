@@ -1,0 +1,61 @@
+$('#modal-container').html('<%= j render "form_modal" %>');
+$(".modal-body").css({"max-height": $(window).height() - 120, "overflow-y" : "auto"});
+$(".datepicker").datetimepicker({format:'yyyy-mm-dd hh:ii', minView:'2', autoclose: true})
+$('#appModal').modal('show');
+$('#sbm_btn').attr("disabled", true);
+$('#sbm_btn').hide();
+$('#modal-submit-button').click(function(){
+    if ($('#req_ord_mat_maktx').val() != ''){
+        $(this).attr("disabled", true);
+        $('#appModal').modal('hide');
+        $(this).closest('form').submit();
+    }
+    else{
+        alert("<%= t('spec_cannot_blank') %>");
+    }
+});
+
+$('#sbm_filerack_btn').attr("disabled", true);
+$('#sbm_filerack_btn').hide();
+$('#modal_sbm_filerack_btn').click(function(){
+    if ($('#filerack_document').val() != '' && $('#filerack_remark').val() != ''){
+        $(this).attr("disabled", true);
+        $(this).closest('form').submit();
+    }
+    else{
+        if ($('#filerack_document').val() == ''){
+            alert("<%= t('file_is_not_selected')%>");
+        }
+        else{
+            alert("<%= t('file_remark_is_empty')%>");
+        }
+    }
+});
+
+
+$('#req_ord_mat_ref_matnr').change(function(){
+    $.ajax({
+        url: '/req_ord_mats/ajax_matnr',
+        data: {matnr: this.value}
+    })
+});
+
+$('#req_ord_mat_target_pct').change(function(){
+    var lower_prc = parseFloat($('#req_ord_mat_lowest_prc').val());
+    var target_pct = parseFloat($('#req_ord_mat_target_pct').val());
+    var target_prc = (lower_prc - (lower_prc * target_pct * 0.01));
+    target_prc = Math.round(target_prc * 1000000) / 1000000;
+    $('#req_ord_mat_target_prc').val(target_prc);
+});
+
+$('#req_ord_mat_target_prc').change(function(){
+    var lower_prc = parseFloat($('#req_ord_mat_lowest_prc').val());
+    var target_pct = 0;
+    if (lower_prc != 0) {
+        var target_prc = parseFloat($('#req_ord_mat_target_prc').val());
+        target_pct = ((lower_prc - target_prc) / lower_prc) * 100;
+        target_pct = Math.round(target_pct * 100) / 100;
+    }
+    $('#req_ord_mat_target_pct').val(target_pct);
+});
+

@@ -1,7 +1,76 @@
-%h1 Editing req_ord
+= render 'submenu'
 
-= render 'form'
+.col-xs-12
+  = simple_form_for(@req_ord) do |f|
+    = f.error_notification
 
-= link_to 'Show', @req_ord
-\|
-= link_to 'Back', req_ords_path
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          報價需求訂單
+          .pull-right
+            = link_to t('start_workflow'), start_workflow_req_ord_path(parent_id: @req_ord.uuid), remote: true if @flows.empty?
+            = render 'layouts/submit_button'
+          .clearfix
+      .panel-body
+        .form-inputs
+          .col-xs-12.col-sm-6
+            = f.input :ord_no, disabled: true
+
+          .col-xs-12.col-sm-6
+            = f.input :matgrp, label: t('attributes.matkl'),disabled: true
+
+          .col-xs-12.col-sm-6
+            = f.input :ord_at, as: :string, readonly: true,
+              input_html:{class: 'datetimepicker', value: date_format(@req_ord.ord_at)}
+
+          .col-xs-12.col-sm-6
+            = f.input :due_at, as: :string, readonly: true,
+              input_html:{class: 'datetimepicker', value: date_format(@req_ord.due_at)}
+
+          .col-xs-12.col-sm-6
+            = f.input :subject, as: :text
+
+          .col-xs-12.col-sm-6
+            = f.input :remark, as: :text
+
+          .col-xs-12.col-sm-6
+            = f.input :werkss, as: :check_boxes, collection: Sap::T001w.select_list, label_method: :name2, value_method: :werks, include_blank: false
+
+          .col-xs-12.col-sm-6
+            = f.input :req_remark, :hint => '這是內部使用說明.'
+
+          .col-xs-12.col-sm-6
+            = f.input :req_by, disabled: true
+
+          .col-xs-12.col-sm-6
+            = f.input :updater_and_time, disabled: true
+
+          .col-xs-12.col-sm-6
+            = f.input :creator_and_time, disabled: true
+
+      .panel-heading
+        .panel-title
+          = t('send_rcv_info')
+      .panel-body
+        .col-xs-12.col-sm-6
+          = f.input :sent_by, disabled: true
+        .col-xs-6.col-sm-3
+          = f.input :sent_at, as: :string, disabled: true
+        .col-xs-6.col-sm-3
+          = f.input :sent_ip, disabled: true
+        .col-xs-6.col-sm-3
+          = f.input :sent_cnt, disabled: true
+        .col-xs-6.col-sm-3
+          = f.input :reply_cnt, disabled: true
+        .col-xs-12.col-sm-6
+          = f.input :reply_at, as: :string, disabled: true
+
+.col-xs-12#req_ord_sups
+  = render 'req_ord_sups'
+
+.col-xs-12#req_ord_mats
+  = render 'req_ord_mats'
+
+.col-xs-12#flows
+  = render 'flows/sign_form'

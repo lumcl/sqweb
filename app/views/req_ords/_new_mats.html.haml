@@ -1,0 +1,37 @@
+.modal.fade#appModal{tabindex:"-1", role:"dialog", aria:{labelledby:"appModalLabel"}}
+  .modal-dialog.modal-lg{role: "document"}
+    .modal-content
+      = form_tag(new_mats_part_2_req_ord_url(@req_ord.uuid), method: 'post', remote: true, authenticity_token: true) do
+        .modal-header.bg-gray
+          %button.close{type:"button", data:{dismiss:"modal"}, aria:{label:"Close"}}
+            %span{aria:{hidden: "true"}} &times;
+          .modal-title#appModalLabel
+            .text-large
+              = t('new_mats_part_1')
+        .modal-body
+          .col-xs-12.col-sm-6
+            .form-group
+              %label.control-label{for:"excel_mats"}= t('excel_mats')
+              = text_area_tag :excel_mats, nil, class: "form-control", rows: "10"
+
+          .col-xs-12.col-sm-6
+            .form-group
+              %label.control-label{for:"matnr"}= t('search_matnr')
+              = text_field_tag :matnr, nil, class: "form-control"
+
+          .col-xs-12.col-sm-6
+            .form-group
+              %label.control-label{for:"maktx"}= t('search_maktx')
+              = text_field_tag :maktx, nil, class: "form-control"
+
+          .col-xs-12.col-sm-6
+            .form-group
+              %label.control-label{for:"matkl"}= t('attributes.matkl')
+              = text_field_tag :matkl, @req_ord.matgrp, class: "form-control", disabled: true
+
+          .col-xs-12.col-sm-6
+            .form-group
+              = button_tag id:'modal-submit-button', class: 'btn btn-default btn-submit', data: { disable_with: "Please wait..." } do
+                %span.glyphicon.glyphicon-floppy-save
+                %b.text-primary
+                  = t('submit')

@@ -1,0 +1,24 @@
+$('#appModal').modal('hide');
+$('#modal-container').html('<%= j render "new_mats_part_2" %>');
+$(".modal-body").css({"max-height": $(window).height() - 120, "overflow-y" : "auto"});
+$('#appModal').modal('show');
+$(".clickAll").click(function () {
+    if ($(".clickAll").prop("checked")) {
+        $("input[name='ids[]']").each(function () {
+            $(this).prop("checked", true);
+        });
+    }
+    else {
+        $("input[name='ids[]']").each(function () {
+            $(this).prop("checked", false);
+        });
+    }
+});
+$('.btn-submit').data('save-text', 'Saving...');
+$('.btn-submit').click(function(){
+    $(this).button('save');
+    $(this).attr("disabled", true);
+    this.form.submit();
+});
+$('#target_pct').focus();
+

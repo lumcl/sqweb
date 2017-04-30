@@ -1,3 +1,11 @@
 .col-xs-12
   %h5
+    = prev_page
+    .tab-2
+    = link_to t('req_order_listing'), req_ords_url
+    .tab-2
     = link_to t('create_req_order'), new_req_ord_url
+    .tab-2
+    = link_to t('participate_supplier'), '#anchor_req_ord_sups'
+    .tab-2
+    = link_to t('material_request_list'), '#anchor_req_ord_mats'

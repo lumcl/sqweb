@@ -11,6 +11,18 @@ class ActiveRecord::Base
     end
   end
 
+  def creator_and_time
+    ws_creator = attributes.include?('creator') ? creator : ''
+    ws_created_at = attributes.include?('created_at') and created_at.present? ? created_at.strftime('%Y%m%d %H:%M') : ''
+    "#{ws_created_at} #{ws_creator}"
+  end
+
+  def updater_and_time
+    ws_updater = attributes.include?('updater') ? updater : ''
+    ws_updated_at = attributes.include?('updated_at') and updated_at.present? ? updated_at.strftime('%Y%m%d %H:%M') : ''
+    "#{ws_updated_at} #{ws_updater}"
+  end
+
   def self.connection_test
     begin
       self.find_by_sql ('select sysdate from dual')

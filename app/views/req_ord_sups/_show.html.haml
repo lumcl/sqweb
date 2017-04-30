@@ -1,0 +1,60 @@
+.modal.fade#appModal{tabindex:"-1", role:"dialog", aria:{labelledby:"appModalLabel"}}
+  .modal-dialog.modal-lg{role: "document"}
+    .modal-content
+      = simple_form_for(@req_ord_sup, remote: true) do |f|
+        .modal-header.bg-gray
+          %button.close{type:"button", data:{dismiss:"modal"}, aria:{label:"Close"}}
+            %span{aria:{hidden: "true"}} &times;
+          .modal-title#appModalLabel
+            .text-large.display-inline
+              = t('participate_supplier')
+        .modal-body
+          .panel.panel-default
+            .panel-body
+              .row
+                .col-xs-6.col-sm-3
+                  = f.input :lifnr, disabled: true
+                .col-xs-6.col-sm-3
+                  = f.input :sortl, disabled: true
+                .col-xs-12.col-sm-6
+                  = f.input :name1, disabled: true
+                .col-xs-6.col-sm-3
+                  = f.input :weark, disabled: true
+                .col-xs-6.col-sm-3
+                  = f.input :trading_type, disabled: true
+                .col-xs-6.col-sm-3
+                  = f.input :sent_at, as: :string, disabled: true
+                .col-xs-6.col-sm-3
+                  = f.input :received_at, as: :string, disabled: true
+                .col-xs-12.col-sm-12
+                  = f.input :emails
+              .row
+                .col-xs-6.col-sm-3
+                  = f.input :open_at, as: :string, disabled: true
+                .col-xs-6.col-sm-3
+                  = f.input :open_ip, disabled: true
+                .col-xs-12.col-sm-6
+                  = f.input :open_by, disabled: true
+                .col-xs-6.col-sm-3
+                  = f.input :reply_at, as: :string, disabled: true
+                .col-xs-6.col-sm-3
+                  = f.input :reply_ip, disabled: true
+                .col-xs-12.col-sm-6
+                  = f.input :reply_by, disabled: true
+                .col-xs-12.col-sm-6
+                  = f.input :creator, disabled: true
+                .col-xs-12.col-sm-6
+                  = f.input :updater, disabled: true
+                .col-xs-12.col-sm-6
+                  = f.input :created_at, as: :string, disabled: true
+                .col-xs-12.col-sm-6
+                  = f.input :updated_at, as: :string, disabled: true
+        .modal-footer.bg-gray
+          .pull-left
+            = button_tag type:'button', id:'modal-submit-button', class: 'btn btn-default btn-submit', data:{disable_with: "Please wait..."} do
+              %span.glyphicon.glyphicon-floppy-save
+              %b.text-primary
+                = t('submit')
+
+
+

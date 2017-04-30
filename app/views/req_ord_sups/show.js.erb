@@ -1,0 +1,9 @@
+$('#modal-container').html('<%= j render "show" %>');
+$(".modal-body").css({"max-height": $(window).height() - 120, "overflow-y" : "auto"});
+$('#appModal').modal('show');
+//$('#sbm_btn').attr("disabled", true);
+//$('#sbm_btn').hide();
+$('#modal-submit-button').click(function(){
+    $('#appModal').modal('hide');
+    $(this).closest('form').submit();
+});

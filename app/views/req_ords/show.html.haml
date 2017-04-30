@@ -1,75 +1,69 @@
-%p#notice= notice
+= render 'submenu'
 
-%p
-  %b Uuid:
-  = @req_ord.uuid
-%p
-  %b Matkl:
-  = @req_ord.matkl
-%p
-  %b Status:
-  = @req_ord.status
-%p
-  %b Ord no:
-  = @req_ord.ord_no
-%p
-  %b Ord date:
-  = @req_ord.ord_date
-%p
-  %b Due at:
-  = @req_ord.due_at
-%p
-  %b Ex curr:
-  = @req_ord.ex_curr
-%p
-  %b Ex rate:
-  = @req_ord.ex_rate
-%p
-  %b Subject:
-  = @req_ord.subject
-%p
-  %b Remark:
-  = @req_ord.remark
-%p
-  %b Req by:
-  = @req_ord.req_by
-%p
-  %b Req remark:
-  = @req_ord.req_remark
-%p
-  %b Sent by:
-  = @req_ord.sent_by
-%p
-  %b Sent at:
-  = @req_ord.sent_at
-%p
-  %b Sent ip:
-  = @req_ord.sent_ip
-%p
-  %b Reply at:
-  = @req_ord.reply_at
-%p
-  %b Sent cnt:
-  = @req_ord.sent_cnt
-%p
-  %b Reply cnt:
-  = @req_ord.reply_cnt
-%p
-  %b Creator:
-  = @req_ord.creator
-%p
-  %b Updater:
-  = @req_ord.updater
-%p
-  %b Approver:
-  = @req_ord.approver
-%p
-  %b Finish at:
-  = @req_ord.finish_at
-%p
-  %b Werkss:
-  = @req_ord.werkss
+.col-xs-12
+  = simple_form_for(@req_ord) do |f|
+    = f.error_notification
 
-= link_to 'Edit', edit_req_ord_path(@req_ord)
-\|
-= link_to 'Back', req_ords_path
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          報價需求訂單
+      .panel-body
+        .form-inputs
+          .col-xs-12.col-sm-6
+            = f.input :ord_no, disabled: true
+
+          .col-xs-12.col-sm-6
+            = f.input :matgrp, label: t('attributes.matkl'),disabled: true
+
+          .col-xs-12.col-sm-6
+            = f.input :ord_at, as: :string, readonly: true,
+              input_html:{class: 'datetimepicker', value: date_format(@req_ord.ord_at)}
+
+          .col-xs-12.col-sm-6
+            = f.input :due_at, as: :string, readonly: true,
+              input_html:{class: 'datetimepicker', value: date_format(@req_ord.due_at)}
+
+          .col-xs-12.col-sm-6
+            = f.input :subject, as: :text
+
+          .col-xs-12.col-sm-6
+            = f.input :remark, as: :text
+
+          .col-xs-12.col-sm-6
+            = f.input :werkss, as: :check_boxes, collection: Sap::T001w.select_list, label_method: :name2, value_method: :werks, include_blank: false
+
+          .col-xs-12.col-sm-6
+            = f.input :req_remark, :hint => '這是內部使用說明.'
+
+          .col-xs-12.col-sm-6
+            = f.input :req_by, disabled: true
+
+          .col-xs-12.col-sm-6
+            = f.input :updater_and_time, disabled: true
+
+          .col-xs-12.col-sm-6
+            = f.input :creator_and_time, disabled: true
+
+      .panel-heading
+        .panel-title
+          = t('send_rcv_info')
+      .panel-body
+        .col-xs-12.col-sm-6
+          = f.input :sent_by, disabled: true
+        .col-xs-6.col-sm-3
+          = f.input :sent_at, as: :string, disabled: true
+        .col-xs-6.col-sm-3
+          = f.input :sent_ip, disabled: true
+        .col-xs-6.col-sm-3
+          = f.input :sent_cnt, disabled: true
+        .col-xs-6.col-sm-3
+          = f.input :reply_cnt, disabled: true
+        .col-xs-12.col-sm-6
+          = f.input :reply_at, as: :string, disabled: true
+
+.col-xs-12#req_ord_sups
+  = render 'req_ord_sups'
+
+.col-xs-12#req_ord_mats
+  = render 'req_ord_mats'

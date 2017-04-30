@@ -1,6 +1,7 @@
 body{padding-top:55px;}
 th{background-color: #f9f9f9;}
 a:hover {color: orangered; text-decoration:underline;}
+a.anchor{display: block;position: relative; top: -55px; visibility: hidden;}
 .text-large{font-size: 125%;}
 .text-normal{font-size: 100%;}
 .hr-lite{margin-top: 5px; margin-bottom: 5px}
@@ -17,7 +18,8 @@ a:hover {color: orangered; text-decoration:underline;}
 .container{padding-left: 0px;padding-right: 0px;}
 .padding-left-right-0{padding-left: 0px;padding-right: 0px;}
 .btn-submit{width: 100px}
-.anchor{display: block;position: relative; top: -75px; visibility: hidden;}
+.form-control[disabled]{background-color: #fafafa}
+.display-inline{display: inline}
 @media print{
     .no-print{display: none !important;}
     a:link:after,a:visited:after {content: "" !important;}

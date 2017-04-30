@@ -1,0 +1,172 @@
+%a.anchor{name:"anchor_flow"}
+.panel.panel-default
+  .panel-heading
+    .panel-title
+      簽核流程記錄
+      .pull-right
+        %a.glyphicon.glyphicon-arrow-up{href:'#topmenu'}
+
+  .panel-body
+    - @flows.sort_by(& :seq).each do |row|
+      %b
+        = row.sign_by.split('@').first.upcase
+      .pull-right
+        = "[審核]" if row.flow_type.eql?('R')
+        = "[會簽]" if row.flow_type.eql?('C')
+        = "[知會]" if row.flow_type.eql?('I')
+        %b.text-primary
+          = "[核准]" if row.flow_type.eql?('A')
+        - if row.result.eql?('Y')
+          %span.text-success.glyphicon.glyphicon-ok
+        - elsif row.result.eql?('N')
+          %span.text-danger.glyphicon.glyphicon-remove
+        - else
+          %span.text-warning.glyphicon.glyphicon-pause
+      .small.text-muted
+        = row.seq
+        = row.notify_at.strftime('%Y%m%d %H:%M') if row.notify_at.present?
+        .pull-right
+          - if row.sign_at.present?
+            = row.sign_at.strftime('%Y%m%d %H:%M')
+          - else
+            %b.text-danger
+              - if row.status.eql?('2')
+                當前簽核者
+              - else
+                .text-muted
+                  還未簽核
+      - if row.remark.present?
+        .well.well-sm
+          = row.remark.html_safe if row.remark.present?
+      - else
+        %br
+
+      = render partial: 'layouts/filerack_list', :locals => {parent_id: row.uuid}
+
+- @flows.sort_by(& :seq).select{|b| b.sign_by.eql?(current_user.email) and b.status.eql?('2')}.each do |row|
+  .panel.panel-default
+    .panel-heading
+      = row.sign_by
+      .pull-right
+        = "[審核]" if row.flow_type.eql?('R')
+        = "[會簽]" if row.flow_type.eql?('C')
+        = "[知會]" if row.flow_type.eql?('I')
+        %b.text-primary
+          = "[核准]" if row.flow_type.eql?('A')
+        %a.glyphicon.glyphicon-arrow-up{href:'#topmenu'}
+
+    .panel-body
+      = simple_form_for(row, html: { multipart: true }) do |f|
+        = hidden_field_tag 'request_url', request.referer
+
+        .form-inputs
+          .form-group
+            %label.control-label 選擇上傳檔案
+            = file_field_tag 'document'
+            = text_field_tag 'remark', '', class:'form-control', placeholder: '輸入檔案描述'
+
+          - unless row.flow_type.eql?('I')
+            .form-group#typeahead-form-group
+              %label.control-label
+                會簽/知會者
+              %textarea.typeahead-input.form-control#typeahead-input{name:'email', autocomplete:'off', placeholder:'輸入前3個字母后,從清單選擇會簽人',data:{provide:'typeahead'}}
+
+          = f.input :remark, label: '批示內容', as: :text, input_html:{name:'remark', autocomplete:'off'}
+
+          %label.control-label
+            批示結果
+          .form-group
+            .btn-group.btn-group-lg{data:{toggle:'buttons'}}
+              %label.btn.btn-default
+                %input#qhjg1{type:'radio', name:'result', autocomplete:'off', value:'Y'}
+                  %b.text-success
+                    - if row.flow_type.eql?('I')
+                      知悉
+                    - else
+                      核准
+              - unless row.flow_type.eql?('I')
+                %label.btn.btn-default#label-qhjq3
+                  %input#qhjg3{type:'radio', name:'result', autocomplete:'off', value:'H'}
+                    %b
+                      會簽
+                %label.btn.btn-default
+                  %input#qhjg2{type:'radio', name:'result', autocomplete:'off', value:'N'}
+                    %b.text-danger
+                      退件
+
+          = button_tag id:'submit-button', class: 'btn btn-default btn-lg', type: 'button', data:{loading_text: t('saving')} do
+            %span.glyphicon.glyphicon-floppy-save
+              %b.text-primary
+                提交審核內容
+
+:javascript
+  function extractor(query) {
+    var result = /([^,]+)$/.exec(query);
+    if(result && result[1])
+        return result[1].trim();
+    return '';
+  }
+
+  $(document).ready(function() {
+
+    //$('input[type=file]').bootstrapFileInput();
+
+    $('#qhjg3').change(function(){
+      if ($('#typeahead-input').val()==''){
+        alert('請輸入會簽者郵件信息.');
+        $('#typeahead-input').focus();
+        return false;
+      }
+    });
+
+    $('#submit-button').click(function(){
+      if ($("input[name='result']:radio:checked").length == 0){
+        alert('請選擇批示結果, 再按提交審核內容');
+        return false;
+      }
+      else if (($("input[name='result']:radio:checked").val() == 'H') && ($('#typeahead-input').val()=='')){
+          alert('請輸入會簽者郵件信息.');
+          $('#typeahead-input').focus();
+          return false;
+      }
+      else{
+        $(this).button('loading');
+        this.form.submit();
+      }
+    });
+
+    $('.typeahead-input').keydown(function(evt){
+      var keycode = evt.which;
+      if (keycode  == 188) { //Enter key's keycode
+        return false;
+      }
+    });
+
+    $('.typeahead-input').typeahead({
+        minLength: 3,
+        items: 10,
+        autoSelect: false,
+        delay: 250,
+        source: function (query, process) {
+            if (query.split(',')[query.split(',').length - 1].length > 2){
+              return $.get('/selects/user?q=' + query, function (data) {
+                  return process(data);
+              });
+            }
+        },
+        updater: function(item) {
+            return this.$element.val().replace(/[^,]*$/,'')+item+',';
+        },
+        matcher: function (item) {
+          var tquery = extractor(this.query);
+          if(!tquery) return false;
+          return ~item.toLowerCase().indexOf(tquery.toLowerCase())
+        },
+        highlighter: function (item) {
+          var query = extractor(this.query).replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
+          return item.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+            return '<strong>' + match + '</strong>'
+          })
+        }
+    });
+  })

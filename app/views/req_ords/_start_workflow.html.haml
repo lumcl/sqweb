@@ -1,0 +1,39 @@
+.modal.fade#appModal{tabindex:"-1", role:"dialog", aria:{labelledby:"appModalLabel"}}
+  .modal-dialog.modal-lg{role: "document"}
+    .modal-content
+      = form_tag(create_workflow_flows_path, method: 'post', remote: true, authenticity_token: true) do
+        .modal-header.bg-gray
+          %button.close{type:"button", data:{dismiss:"modal"}, aria:{label:"Close"}}
+            %span{aria:{hidden: "true"}} &times;
+          .modal-title#appModalLabel
+            .text-large
+              = t('config_workflow')
+        .modal-body
+          = hidden_field_tag 'parent_id', params[:parent_id]
+          = hidden_field_tag 'request_url', request.referer
+
+          .col-xs-12
+            .form-group
+              %label{for: 'shenhe'}審核人員 Reviewer
+              %textarea.typeahead-input-email.form-control#shenhe{name:'shenhe', autocomplete:'off', data:{provide:'typeahead'}}
+                = params[:shenhe]
+
+          .col-xs-12.has-error
+            .form-group
+              %label{for: 'hezhun'}核准人 Approver
+              = text_field_tag 'hezhun', params[:hezhun], class: 'typeahead-input-email form-control', data:{provide:'typeahead'}
+
+          .col-xs-12
+            .form-group
+              %label{for: 'zhihui'}知會人員 Inform
+              %textarea.typeahead-input-email.form-control#zhihui{name:'zhihui', autocomplete:'off', data:{provide:'typeahead'}}
+                = params[:zhihui]
+
+          .col-xs-12
+            .form-group
+              = button_tag id:'submit-button', class: 'btn btn-default btn-lg', type: 'button', data:{loading_text: t('saving')} do
+                %span.glyphicon.glyphicon-floppy-save
+                %b.text-primary
+                  啟動審核流程 Start Flow
+
+

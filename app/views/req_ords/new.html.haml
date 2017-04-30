@@ -25,10 +25,12 @@
             = f.input :vtweg, collection: %w[DT TX TP JP], include_blank: false, hint: '報價區域'
 
           .col-xs-12.col-sm-6
-            = f.input :ord_at
+            = f.input :ord_at, as: :string, readonly: true,
+              input_html:{class: 'datetimepicker', value: date_format(@req_ord.ord_at)}
 
           .col-xs-12.col-sm-6
-            = f.input :due_at
+            = f.input :due_at, as: :string, readonly: true,
+              input_html:{class: 'datetimepicker', value: date_format(@req_ord.due_at)}
 
           .col-xs-12.col-sm-6
             = f.input :subject, as: :text
@@ -37,7 +39,7 @@
             = f.input :remark, as: :text
 
           .col-xs-12.col-sm-6
-            = f.input :werkss, as: :check_boxes, collection: ENV['PLANT'].split(',')
+            = f.input :werkss, as: :check_boxes, collection: Sap::T001w.select_list, label_method: :name2, value_method: :werks, include_blank: false
 
           .col-xs-12.col-sm-6
             = f.input :req_remark, :hint => '這是內部使用說明.'
@@ -55,46 +57,14 @@
 = link_to 'Back', req_ords_path
 
 :javascript
+
   $(document).ready(function () {
-    $('#submit-button').attr(disable: disable);
 
-    // $.ajax({
-    //   url: '/ipqc/orders/get_aufnr',
-    //   data: {aufnr: $('#ipqc_order_aufnr').val()}
-    // })
-
-    $('#req_ord_ord_date').focus();
-
-    $('#req_ord_matkl').change(function(){
-      $.ajax({
-        url: '/req_ords/check_matkl',
-        data: {matkl: $('#req_ord_matkl').val()}
-      })
+    $('#req_ord_matgrp').change(function(){
+      $('#req_ord_matgrp_id').val() == '' ? $('#submit-button').hide() : $('#submit-button').show();
     });
 
-    $('#ipqc_order_mline').change(function(){
-      $.ajax({
-        url: '/ipqc/orders/get_supervisor',
-        data: {id: $('#ipqc_order_mline_id').val()}
-      })
-    });
+    $('#submit-button').hide();
+    $('#req_ord_matgrp').focus();
 
-    // $('#ipqc_order_mline').blur(function(){
-    //   $.ajax({
-    //     url: '/ipqc/orders/check_mline',
-    //     data: {id: $('#ipqc_order_mline_id').val()}
-    //   })
-    // });
-
-    $('#ipqc_order_reporter').focus(function(){
-      if ($('#ipqc_order_supervisor').val() == ''){
-        $('#ipqc_order_supervisor').focus();
-      }
-      else{
-        if ($('#ipqc_order_line_leader').val() == ''){
-          $('#ipqc_order_line_leader').focus();
-        }
-      }
-    });
-
-  })
+  });

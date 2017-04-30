@@ -50,10 +50,10 @@
             = render 'layouts/excel_number_format'
             - @avls.each do |avl|
               %tr
-                / %td
-                / = link_to t('edit'), edit_avl_path(avl)
-                / |
-                / = link_to t('destroy'), avl, :method => :delete, :data => { :confirm => t('confirm')}
+                %td
+                  = link_to t('edit'), edit_avl_path(avl)
+                  |
+                  = link_to t('destroy'), avl, :method => :delete, :data => { :confirm => t('confirm')}
                 %td= avl.werks
                 %td= avl.lifnr
                 %td.excel-text= avl.matkl
@@ -61,5 +61,5 @@
                 %td= avl.resp
                 %td= avl.uuid
 
-= paginate @avls unless @avls.empty?
+  = paginate @avls
 

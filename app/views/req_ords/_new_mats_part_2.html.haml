@@ -1,0 +1,35 @@
+.modal.fade#appModal{tabindex:"-1", role:"dialog", aria:{labelledby:"appModalLabel"}}
+  .modal-dialog.modal-lg{role: "document"}
+    .modal-content
+      = form_tag(create_mats_req_ords_url, method: 'post', class: 'form-inline') do
+        = hidden_field_tag 'req_ord_id', @req_ord.uuid
+        .modal-header.bg-gray
+          %button.close{type:"button", data:{dismiss:"modal"}, aria:{label:"Close"}}
+            %span{aria:{hidden: "true"}} &times;
+          .modal-title#appModalLabel
+            .text-large.display-inline
+              = t('new_mats_part_2')
+            .tab-2
+
+            %label.control-label.display-inline{for:"target_pct"}= t('keyin_target_pct')
+            = text_field_tag :target_pct, nil, class: "form-control", placeholder: t('keyin_target_pct')
+            = render 'layouts/submit_button'
+
+        .modal-body
+          .table-responsive
+            %table.table.small.table-bordered.table-condensed#rpt_new_mats_part_2
+              %thead
+                %tr
+                  %th= check_box_tag 'clickAll', nil, true, class:'clickAll'
+                  %th= t('attributes.matnr')
+                  %th= t('attributes.maktx')
+                  %th= t('attributes.status')
+                  %th= t('attributes.meins')
+              %tbody
+                - @materials.each do |mat|
+                  %tr
+                    %td= check_box_tag 'ids[]', mat.matnr, true
+                    %td= mat.matnr
+                    %td= mat.maktx
+                    %td= mat.mstae
+                    %td= mat.meins

@@ -2,25 +2,31 @@
 %html
   %head
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-    %title= content_for?(:title) ? yield(:title) : 'MFGWEB 生產線網站'
+    %title= content_for?(:title) ? yield(:title) : 'SQWEB 供應商報價系統'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'SQWEB'}"}
 
     %link{href: '/bootstrap-3.3.6-dist/css/bootstrap.min.css', rel:'stylesheet'}
-    %link{href: '/css/application.css', rel:'stylesheet'}
+    %link{href: '/css/bootstrap-datetimepicker.min.css', rel:'stylesheet'}
+    %link{href: '/css/application_sqweb.css', rel:'stylesheet'}
 
     %script{src: '/js/jquery-1.12.3.min.js'}
     %script{src: '/js/jquery_ujs.js'}
+    %script{src: '/js/jquery.iframe-transport.js'}
+    %script{src: '/js/jquery.remotipart.js'}
     %script{src: '/js/excellentexport.js'}
     %script{src: '/bootstrap-3.3.6-dist/js/bootstrap.min.js'}
     %script{src: '/js/bootstrap3-autocomplete-input.min.js'}
     %script{src: '/js/bootstrap3-typeahead.min.js'}
-    %script{src: '/js/application.js'}
+    %script{src: '/js/bootstrap-datetimepicker.min.js'}
+    %script{src: '/js/application_sqweb.js'}
 
     = csrf_meta_tags
   %body
+    #modal-container
     %header
       = render 'layouts/navigation'
     %main{:role => "main"}
       = render 'layouts/messages'
-      .container
+      .container-fluid
+        %a.anchor{name:'topmenu'}
         = yield

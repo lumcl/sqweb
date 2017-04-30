@@ -1,0 +1,52 @@
+$('#modal-container').html('<%= j render "start_workflow" %>');
+$(".modal-body").css({"max-height": $(window).height() - 120, "overflow-y" : "auto"});
+$('#appModal').modal('show');
+
+$('#submit-button').data('save-text', 'Saving...');
+$('#submit-button').click(function(){
+    $(this).button('save');
+    $(this).attr("disabled", true);
+    this.form.submit();
+});
+
+function extractor(query) {
+    var result = /([^,]+)$/.exec(query);
+    if(result && result[1])
+        return result[1].trim();
+    return '';
+}
+
+$('.typeahead-input-email').typeahead({
+    minLength: 3,
+    items: 10,
+    autoSelect: false,
+    delay: 250,
+    source: function (query, process) {
+        if (query.split(',')[query.split(',').length - 1].length > 2) {
+            return $.get('/selects/user?q=' + query, function (data) {
+                return process(data);
+            });
+        }
+    },
+    updater: function (item) {
+        return this.$element.val().replace(/[^,]*$/, '') + item + ',';
+    },
+    matcher: function (item) {
+        var tquery = extractor(this.query);
+        if (!tquery) return false;
+        return ~item.toLowerCase().indexOf(tquery.toLowerCase())
+    },
+    highlighter: function (item) {
+        var query = extractor(this.query).replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
+        return item.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+            return '<strong>' + match + '</strong>'
+        })
+    }
+});
+
+$('.typeahead-input-email').keydown(function (evt) {
+    var keycode = evt.which;
+    if (keycode == 188) { //Enter key's keycode
+        return false;
+    }
+})

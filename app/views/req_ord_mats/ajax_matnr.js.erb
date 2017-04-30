@@ -1,0 +1,8 @@
+<% if @rows.present? %>
+  $('#req_ord_mat_ref_maktx').val('<%= @rows.first.maktx %>');
+<% else %>
+  $('#req_ord_mat_ref_matnr').val('');
+  $('#req_ord_mat_ref_maktx').val('');
+  alert('<%= t('invalid_matnr') %>');
+  $('#req_ord_mat_ref_matnr').focus();
+<% end %>

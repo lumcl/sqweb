@@ -1,0 +1,19 @@
+$('#modal-container').html('<%= j render "form_modal" %>');
+$(".modal-body").css({"max-height": $(window).height() - 120, "overflow-y" : "auto"});
+$(".datepicker").datetimepicker({format:'yyyy-mm-dd hh:ii', minView:'2', autoclose: true})
+$('#appModal').modal('show');
+$('#sbm_btn').attr("disabled", true);
+$('#sbm_btn').hide();
+$('#modal-submit-button').click(function(){
+    $(this).attr("disabled", true);
+    $('#appModal').modal('hide');
+    $(this).closest('form').submit();
+});
+
+$('#req_ord_mat_ref_matnr').change(function(){
+    $.ajax({
+        url: '/req_ord_mats/ajax_matnr',
+        data: {matnr: this.value}
+    })
+
+});

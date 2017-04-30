@@ -1,0 +1,20 @@
+APP_UOMS = %W[EA KG M ML MM]
+APP_DATE_UOMS = %W[YEAR QUATER MONTH]
+APP_PRD_APPS =
+     ['AUDIO/VIDEO EQUIPMEN',
+      'CHANNEL',
+      'COMMERCIAL APPLICATI',
+      'CONSUMER ELECTRONICS',
+      'ENERGY SYSTEM, >500V',
+      'HOME APPLIANCES',
+      'INDUSTRIAL',
+      'IT ACCESSORY',
+      'IT/NB',
+      'LED LIGHTING',
+      'NETWORKING',
+      'OTHERS',
+      'PHONE',
+      'TWO WAY RADIO',
+      'UPS',
+      'FPD/LCD',
+      'MEDICAL EQUIPMENT']

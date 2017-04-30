@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-ENV['PLANT'] = "111A,112A,281A,381A,481A,482A"
+ENV['PLANT'] = "101A,111A,112A,281A,381A,481A,482A,921A"
 
 module SqWeb
   class Application < Rails::Application

@@ -1,0 +1,25 @@
+#filerack_list
+  - fileracks = Filerack.where(parent_id: parent_id).order(:created_at)
+  - if fileracks.present?
+    .table-responsive
+      %table.table.table-bordered.table-condensed#rpt
+        %thead
+          %tr
+            %th
+            =# %th= t('attachment_name')
+            %th= t('attachment_remark')
+            %th= t('attributes.creator')
+            %th.visible-sm.visible-md.visible-lg= t('attributes.created_at')
+            %th.visible-sm.visible-md.visible-lg= t('attributes.create_ip')
+        %tbody
+          - fileracks.each do |filerack|
+            %tr
+              %td= link_to t('destroy'), filerack, :method => :delete, :data => { :confirm => t('confirm_delete') }, remote: true
+              =# %td= link_to filerack.filename, filerack.download_url
+              %td= link_to filerack.remark, filerack.download_url
+              %td
+                = filerack.creator.split('@').first if filerack.creator.present?
+              %td.visible-sm.visible-md.visible-lg
+                = filerack.created_at.strftime('%Y-%m-%d')
+              %td.visible-sm.visible-md.visible-lg
+                = filerack.create_ip

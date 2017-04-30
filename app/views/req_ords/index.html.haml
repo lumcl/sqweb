@@ -1,68 +1,50 @@
-
 = render 'submenu'
 
-%h1 Listing req_ords
+- if @req_ords.present?
+  .col-xs-12
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          .pull-left
+            查詢結果 Listing
+          .pull-right
+            = export_to_excel('rpt')
+          .clearfix
+      .table-responsive
+        %table.table.table-bordered.table-condensed#rpt
+          %thead
+            %tr
+              %th
+              %th= t('attributes.ord_no')
+              %th= t('attributes.matkl')
+              %th= t('attributes.status')
+              %th= t('attributes.ord_at')
+              %th= t('attributes.due_at')
+              %th= t('attributes.subject')
+              %th= t('attributes.werkss')
+              %th.text-right= t('attributes.sent_cnt')
+              %th.text-right= t('attributes.reply_cnt')
+          %tbody
+            - @req_ords.each do |req_ord|
+              %tr
+                %td
+                  = link_to t('edit'), edit_req_ord_path(req_ord)
+                  .tab-1
+                  = link_to t('destroy'), req_ord, :method => :delete, :data => { :confirm => t('confirm') }
 
-%table
-  %thead
-    %tr
-      %th Uuid
-      %th Matkl
-      %th Status
-      %th Ord no
-      %th Ord date
-      %th Due at
-      %th Ex curr
-      %th Ex rate
-      %th Subject
-      %th Remark
-      %th Req by
-      %th Req remark
-      %th Sent by
-      %th Sent at
-      %th Sent ip
-      %th Reply at
-      %th Sent cnt
-      %th Reply cnt
-      %th Creator
-      %th Updater
-      %th Approver
-      %th Finish at
-      %th Werkss
-      %th
-      %th
-      %th
+                %td= req_ord.ord_no[0] == '*' ? '**********' : req_ord.ord_no
+                %td= req_ord.matkl
+                %td= req_ord.status
+                %td= req_ord.ord_at.strftime('%Y%m%d')
+                %td= req_ord.due_at.strftime('%Y%m%d %H:%M')
+                %td= req_ord.subject
+                %td= req_ord.werkss.join(',')
+                %td.text-right= req_ord.sent_cnt
+                %td.text-right= req_ord.reply_cnt
 
-  %tbody
-    - @req_ords.each do |req_ord|
-      %tr
-        %td= req_ord.uuid
-        %td= req_ord.matkl
-        %td= req_ord.status
-        %td= req_ord.ord_no
-        %td= req_ord.ord_date
-        %td= req_ord.due_at
-        %td= req_ord.ex_curr
-        %td= req_ord.ex_rate
-        %td= req_ord.subject
-        %td= req_ord.remark
-        %td= req_ord.req_by
-        %td= req_ord.req_remark
-        %td= req_ord.sent_by
-        %td= req_ord.sent_at
-        %td= req_ord.sent_ip
-        %td= req_ord.reply_at
-        %td= req_ord.sent_cnt
-        %td= req_ord.reply_cnt
-        %td= req_ord.creator
-        %td= req_ord.updater
-        %td= req_ord.approver
-        %td= req_ord.finish_at
-        %td= req_ord.werkss
-        %td= link_to 'Show', req_ord
-        %td= link_to 'Edit', edit_req_ord_path(req_ord)
-        %td= link_to 'Destroy', req_ord, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  = paginate @req_ords
 
-%br
+  = render 'submenu'
 
-= link_to 'New Req ord', new_req_ord_path
+
+

@@ -1,0 +1,7 @@
+$('#modal-container').html('<%= j render "new_mats" %>');
+$(".modal-body").css({"max-height": $(window).height() - 120, "overflow-y" : "auto"});
+$('#appModal').modal('show');
+$('#modal-submit-button').click(function(){
+    $(this).attr("disabled", true);
+    $('#appModal').modal('hide');
+});

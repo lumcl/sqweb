@@ -1,0 +1,99 @@
+.modal.fade#appModal{tabindex:"-1", role:"dialog", aria:{labelledby:"appModalLabel"}}
+  .modal-dialog.modal-lg{role: "document"}
+    .modal-content
+      = simple_form_for(@req_ord_mat, remote: true) do |f|
+        = f.input :req_ord_id, as: :hidden
+        .panel.panel-default
+          .panel-heading
+            .panel-title
+              = t('material_info')
+              = button_tag id:'sbm_btn'
+              = button_tag type:'button', id:'modal-submit-button', class: 'btn btn-default btn-submit', data:{disable_with: "Please wait..."} do
+                %span.glyphicon.glyphicon-floppy-save
+                %b.text-primary
+                  = t('submit')
+              %button.close{type:"button", data:{dismiss:"modal"}, aria:{label:"Close"}}
+                %span{aria:{hidden: "true"}} &times;
+          .panel-body
+            - sap_matnr = @req_ord_mat.sap_matnr.present?
+            .col-xs-12.col-sm-6
+              = f.input :matnr, disabled: sap_matnr
+            .col-xs-12.col-sm-6
+              = f.input :maktx, disabled: sap_matnr
+            .col-xs-12
+              = f.input :maker_part_no, disabled: sap_matnr
+            .col-xs-12.col-sm-6
+              = f.input :ref_matnr, disabled: sap_matnr
+            .col-xs-12.col-sm-6
+              = f.input :ref_maktx, disabled: sap_matnr, readonly: true
+            .col-xs-12.col-sm-6
+              = f.input :remark, input_html: { rows: '3' }
+            .col-xs-6.col-sm-3
+              = f.input :status
+            .col-xs-6.col-sm-3
+              = f.input :meins, collection: APP_UOMS, disabled: sap_matnr
+            .col-xs-6.col-sm-3
+              = f.input :target_pct
+            .col-xs-6.col-sm-3
+              = f.input :target_prc
+            .col-xs-6.col-sm-3
+              = f.input :lowest_prc, disabled: true
+            .col-xs-6.col-sm-3
+              = f.input :domestic_prc, disabled: true
+            .col-xs-6.col-sm-3
+              = f.input :foreign_prc, disabled: true
+          .panel-heading
+            .panel-title
+              = t('material_cust_info')
+          .panel-body
+            .col-xs-12.col-sm-6
+              = f.input :end_customer
+            .col-xs-12.col-sm-6
+              = f.input :prd_app, collection: APP_PRD_APPS
+            .col-xs-12.col-sm-6
+              = f.input :design_no
+            .col-xs-12.col-sm-6
+              = f.input :drawing
+            .col-xs-12.col-sm-6
+              = f.input :pilot_run_date, as: :string, readonly: true,
+                input_html:{class: 'datepicker', value: date_format(@req_ord_mat.pilot_run_date)}
+            .col-xs-12.col-sm-6
+              = f.input :mass_prod_date, as: :string, readonly: true,
+                input_html:{class: 'datepicker', value: date_format(@req_ord_mat.mass_prod_date)}
+            .col-xs-6.col-sm-3
+              = f.input :forecast_qty
+            .col-xs-6.col-sm-3
+              = f.input :forecast_uom, collection: APP_DATE_UOMS
+            .col-xs-12.col-sm-6
+              = f.input :order_plant, collection: Sap::T001w.select_list, label_method: :name2, value_method: :werks
+            .col-xs-12.col-sm-6
+              = f.input :updater_and_time, disabled: true
+            .col-xs-12.col-sm-6
+              = f.input :update_ip, disabled: true
+            .row
+            .col-xs-12.col-sm-6
+              = f.input :creator_and_time, disabled: true
+            .col-xs-12.col-sm-6
+              = f.input :create_ip, disabled: true
+
+      - if not @req_ord_mat.new_record?
+        = simple_form_for(Filerack.new, remote: true) do |f|
+          = f.input :parent_id, as: :hidden, input_html:{value: @req_ord_mat.uuid}
+          .panel.panel-default
+            .panel-heading
+              .panel-title
+                = t('attachment_info')
+            %p
+            .col-xs-12
+              = render partial: 'layouts/filerack_list', :locals => {parent_id: @req_ord_mat.uuid}
+            .panel-body
+              .col-xs-12
+                = f.input :document, label: t('select_attachment')
+              .col-xs-12
+                = f.input :remark, label: t('attachment_remark')
+              .col-xs-12
+                = f.submit id:'sbm_filerack_btn'
+                = button_tag type:'button', id:'modal_sbm_filerack_btn', class: 'btn btn-default btn-submit', data:{disable_with: "Please wait..."} do
+                  %span.glyphicon.glyphicon-floppy-save
+                  %b.text-primary
+                    = t('submit')

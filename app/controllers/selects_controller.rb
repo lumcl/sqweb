@@ -15,4 +15,13 @@ class SelectsController < ApplicationController
     render json: options.to_json
   end
 
+  def user
+    users = []
+    User.search(params[:q].split(',').last).each do |row|
+      # users.append [row.mail.first.upcase, row.mail.first.upcase]
+      users.append row.mail.first.split('@').first.upcase
+    end
+    render :json => users.sort
+  end
+
 end

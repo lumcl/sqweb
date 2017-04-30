@@ -154,7 +154,7 @@ class BurninsController < ApplicationController
       focus = "$('#aufnr').focus();"
       sbmbtn = "$('#submit-button').hide();";
     else
-      sbmbtn = "$('#submit-button').show();";
+      sbmbtn = "$('#submit-button').show1();";
     end
     render js: "
                   $('#aufnr').val('#{aufnr}');

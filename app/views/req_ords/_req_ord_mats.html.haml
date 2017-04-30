@@ -1,0 +1,39 @@
+%a.anchor{name:"anchor_req_ord_mats"}
+.panel.panel-default
+  .panel-heading
+    .panel-title
+      = t('material_request_list')
+      .tab-2
+      %h5.display-inline
+        = link_to t('create_sap_material'), new_mats_req_ord_url(@req_ord), remote: true
+        .tab-2
+        = link_to t('create_no_matnr'), new_req_ord_mat_url(id: @req_ord.uuid), remote: true
+        .pull-right
+          %a.glyphicon.glyphicon-arrow-up{href:'#topmenu'}
+      .clearfix
+  .table-responsive
+    %table.table.table-bordered.table-condensed#rpt_req_ord_mats
+      %thead
+        %tr
+          %th= check_box_tag 'clickAll', nil, false, class:'clickAll'
+          %th
+          %th= t('attributes.matnr')
+          %th= t('attributes.maktx')
+          %th= t('attributes.status')
+          %th= t('attributes.meins')
+          %th.text-right= t('attributes.lowest_prc')
+          %th.text-right= t('attributes.target_pct')
+          %th.text-right= t('attributes.target_prc')
+      %tbody
+        - @req_ord.req_ord_mats.each do |req_ord_mat|
+          %tr
+            %td= check_box_tag 'ids[]', req_ord_mat.id, false
+            %td= link_to t('destroy'), req_ord_mat, :method => :delete, :data => { :confirm => t('confirm') }
+            %td= link_to req_ord_mat.matnr, edit_req_ord_mat_url(req_ord_mat), remote: true
+            %td= link_to req_ord_mat.maktx[0..39], edit_req_ord_mat_url(req_ord_mat), remote: true
+            %td= req_ord_mat.status
+            %td= req_ord_mat.meins
+            %td.text-right= req_ord_mat.lowest_prc
+            %td.text-right= req_ord_mat.target_pct
+            %td.text-right= req_ord_mat.target_prc
+
