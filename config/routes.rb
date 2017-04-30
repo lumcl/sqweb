@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :req_ord_lines
   resources :flows do
     post :create_workflow, on: :collection
   end

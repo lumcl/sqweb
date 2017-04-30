@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Uuid:
+  = @filerack.uuid
+%p
+  %b Parent:
+  = @filerack.parent_id
+%p
+  %b Filename:
+  = @filerack.filename
+%p
+  %b Document:
+  = @filerack.document
+%p
+  %b Remark:
+  = @filerack.remark
+%p
+  %b Creator:
+  = @filerack.creator
+
+= link_to 'Edit', edit_filerack_path(@filerack)
+\|
+= link_to 'Back', fileracks_path

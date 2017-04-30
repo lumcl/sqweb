@@ -1,0 +1,73 @@
+%h1 Listing req_ord_mats
+
+%table
+  %thead
+    %tr
+      %th Uuid
+      %th Req ord
+      %th Seq
+      %th Matnr
+      %th Maktx
+      %th Remark
+      %th Status
+      %th Meins
+      %th Target pct
+      %th Target prc
+      %th Vtweg prc
+      %th Lowest prc
+      %th Ref matnr
+      %th Ref maktx
+      %th End customer
+      %th Prd app
+      %th Design no
+      %th Pilot run date
+      %th Mass prod date
+      %th Forecast qty
+      %th Forecast uom
+      %th Drawing
+      %th Order plant
+      %th Creator
+      %th Updater
+      %th Create ip
+      %th Update ip
+      %th
+      %th
+      %th
+
+  %tbody
+    - @req_ord_mats.each do |req_ord_mat|
+      %tr
+        %td= req_ord_mat.uuid
+        %td= req_ord_mat.req_ord_id
+        %td= req_ord_mat.seq
+        %td= req_ord_mat.matnr
+        %td= req_ord_mat.maktx
+        %td= req_ord_mat.remark
+        %td= req_ord_mat.status
+        %td= req_ord_mat.meins
+        %td= req_ord_mat.target_pct
+        %td= req_ord_mat.target_prc
+        %td= req_ord_mat.vtweg_prc
+        %td= req_ord_mat.lowest_prc
+        %td= req_ord_mat.ref_matnr
+        %td= req_ord_mat.ref_maktx
+        %td= req_ord_mat.end_customer
+        %td= req_ord_mat.prd_app
+        %td= req_ord_mat.design_no
+        %td= req_ord_mat.pilot_run_date
+        %td= req_ord_mat.mass_prod_date
+        %td= req_ord_mat.forecast_qty
+        %td= req_ord_mat.forecast_uom
+        %td= req_ord_mat.drawing
+        %td= req_ord_mat.order_plant
+        %td= req_ord_mat.creator
+        %td= req_ord_mat.updater
+        %td= req_ord_mat.create_ip
+        %td= req_ord_mat.update_ip
+        %td= link_to 'Show', req_ord_mat
+        %td= link_to 'Edit', edit_req_ord_mat_path(req_ord_mat)
+        %td= link_to 'Destroy', req_ord_mat, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Req ord mat', new_req_ord_mat_path

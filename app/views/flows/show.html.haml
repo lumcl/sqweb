@@ -1,0 +1,54 @@
+%p#notice= notice
+
+%p
+  %b Uuid:
+  = @flow.uuid
+%p
+  %b Parent:
+  = @flow.parent_id
+%p
+  %b Seq:
+  = @flow.seq
+%p
+  %b Flow type:
+  = @flow.flow_type
+%p
+  %b Notify at:
+  = @flow.notify_at
+%p
+  %b Sign by:
+  = @flow.sign_by
+%p
+  %b Sign at:
+  = @flow.sign_at
+%p
+  %b Sign ip:
+  = @flow.sign_ip
+%p
+  %b Result:
+  = @flow.result
+%p
+  %b Remark:
+  = @flow.remark
+%p
+  %b Assign:
+  = @flow.assign_id
+%p
+  %b Assign by:
+  = @flow.assign_by
+%p
+  %b Assign at:
+  = @flow.assign_at
+%p
+  %b Status:
+  = @flow.status
+%p
+  %b Creator:
+  = @flow.creator
+%p
+  %b Updater:
+  = @flow.updater
+
+= link_to 'Edit', edit_flow_path(@flow)
+\|
+= link_to 'Back', flows_path

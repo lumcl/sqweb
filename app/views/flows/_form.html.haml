@@ -1,0 +1,23 @@
+= simple_form_for(@flow) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :uuid
+    = f.input :parent_id
+    = f.input :seq
+    = f.input :flow_type
+    = f.input :notify_at
+    = f.input :sign_by
+    = f.input :sign_at
+    = f.input :sign_ip
+    = f.input :result
+    = f.input :remark
+    = f.input :assign_id
+    = f.input :assign_by
+    = f.input :assign_at
+    = f.input :status
+    = f.input :creator
+    = f.input :updater
+
+  .form-actions
+    = f.button :submit

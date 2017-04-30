@@ -1,0 +1,60 @@
+%p#notice= notice
+
+%p
+  %b Uuid:
+  = @req_ord_sup.uuid
+%p
+  %b Req ord:
+  = @req_ord_sup.req_ord_id
+%p
+  %b Lifnr:
+  = @req_ord_sup.lifnr
+%p
+  %b Sortl:
+  = @req_ord_sup.sortl
+%p
+  %b Name1:
+  = @req_ord_sup.name1
+%p
+  %b Weark:
+  = @req_ord_sup.weark
+%p
+  %b Trading type:
+  = @req_ord_sup.trading_type
+%p
+  %b Emails:
+  = @req_ord_sup.emails
+%p
+  %b Sent at:
+  = @req_ord_sup.sent_at
+%p
+  %b Received at:
+  = @req_ord_sup.received_at
+%p
+  %b Open by:
+  = @req_ord_sup.open_by
+%p
+  %b Open at:
+  = @req_ord_sup.open_at
+%p
+  %b Open ip:
+  = @req_ord_sup.open_ip
+%p
+  %b Reply by:
+  = @req_ord_sup.reply_by
+%p
+  %b Reply at:
+  = @req_ord_sup.reply_at
+%p
+  %b Reply ip:
+  = @req_ord_sup.reply_ip
+%p
+  %b Creator:
+  = @req_ord_sup.creator
+%p
+  %b Updater:
+  = @req_ord_sup.updater
+
+= link_to 'Edit', edit_req_ord_sup_path(@req_ord_sup)
+\|
+= link_to 'Back', req_ord_sups_path

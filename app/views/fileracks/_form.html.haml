@@ -1,0 +1,13 @@
+= simple_form_for(@filerack) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :uuid
+    = f.input :parent_id
+    = f.input :filename
+    = f.input :document
+    = f.input :remark
+    = f.input :creator
+
+  .form-actions
+    = f.button :submit

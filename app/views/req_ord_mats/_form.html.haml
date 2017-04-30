@@ -1,0 +1,34 @@
+= simple_form_for(@req_ord_mat) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :uuid
+    = f.input :req_ord_id
+    = f.input :seq
+    = f.input :matnr
+    = f.input :maktx
+    = f.input :remark
+    = f.input :status
+    = f.input :meins
+    = f.input :target_pct
+    = f.input :target_prc
+    = f.input :vtweg_prc
+    = f.input :lowest_prc
+    = f.input :ref_matnr
+    = f.input :ref_maktx
+    = f.input :end_customer
+    = f.input :prd_app
+    = f.input :design_no
+    = f.input :pilot_run_date
+    = f.input :mass_prod_date
+    = f.input :forecast_qty
+    = f.input :forecast_uom
+    = f.input :drawing
+    = f.input :order_plant
+    = f.input :creator
+    = f.input :updater
+    = f.input :create_ip
+    = f.input :update_ip
+
+  .form-actions
+    = f.button :submit

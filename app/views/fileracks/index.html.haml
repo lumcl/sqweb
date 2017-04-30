@@ -1,0 +1,31 @@
+%h1 Listing fileracks
+
+%table
+  %thead
+    %tr
+      %th Uuid
+      %th Parent
+      %th Filename
+      %th Document
+      %th Remark
+      %th Creator
+      %th
+      %th
+      %th
+
+  %tbody
+    - @fileracks.each do |filerack|
+      %tr
+        %td= filerack.uuid
+        %td= filerack.parent_id
+        %td= filerack.filename
+        %td= filerack.document
+        %td= filerack.remark
+        %td= filerack.creator
+        %td= link_to 'Show', filerack
+        %td= link_to 'Edit', edit_filerack_path(filerack)
+        %td= link_to 'Destroy', filerack, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Filerack', new_filerack_path

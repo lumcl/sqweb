@@ -1,0 +1,113 @@
+%h1 Listing req_ord_lines
+
+%table
+  %thead
+    %tr
+      %th Uuid
+      %th Req ord
+      %th Req ord sup
+      %th Req ord mat
+      %th Werks
+      %th Cur prc
+      %th Cur prc conv
+      %th Cur leadtime
+      %th Cur moq
+      %th Sup prc
+      %th Sup prc conv
+      %th Chg pct
+      %th Sup valid from
+      %th Sup valid to
+      %th Sup moq
+      %th Sup leadtime
+      %th Sup remark
+      %th Open by
+      %th Open at
+      %th Open ip
+      %th Reply by
+      %th Reply at
+      %th Reply ip
+      %th Cur alloc
+      %th Sup alloc
+      %th Req remark
+      %th Req review by
+      %th Req review at
+      %th Req review result
+      %th Req review remark
+      %th Req approved by
+      %th Req approved at
+      %th Req approved result
+      %th Req approved remark
+      %th Rcv remark
+      %th Rcv review by
+      %th Rcv review at
+      %th Rcv review result
+      %th Rcv review remark
+      %th Rcv approved by
+      %th Rcv approved at
+      %th Rcv approved result
+      %th Rcv approved remark
+      %th Creator
+      %th Updater
+      %th Create ip
+      %th Update ip
+      %th
+      %th
+      %th
+
+  %tbody
+    - @req_ord_lines.each do |req_ord_line|
+      %tr
+        %td= req_ord_line.uuid
+        %td= req_ord_line.req_ord_id
+        %td= req_ord_line.req_ord_sup_id
+        %td= req_ord_line.req_ord_mat_id
+        %td= req_ord_line.werks
+        %td= req_ord_line.cur_prc
+        %td= req_ord_line.cur_prc_conv
+        %td= req_ord_line.cur_leadtime
+        %td= req_ord_line.cur_moq
+        %td= req_ord_line.sup_prc
+        %td= req_ord_line.sup_prc_conv
+        %td= req_ord_line.chg_pct
+        %td= req_ord_line.sup_valid_from
+        %td= req_ord_line.sup_valid_to
+        %td= req_ord_line.sup_moq
+        %td= req_ord_line.sup_leadtime
+        %td= req_ord_line.sup_remark
+        %td= req_ord_line.open_by
+        %td= req_ord_line.open_at
+        %td= req_ord_line.open_ip
+        %td= req_ord_line.reply_by
+        %td= req_ord_line.reply_at
+        %td= req_ord_line.reply_ip
+        %td= req_ord_line.cur_alloc
+        %td= req_ord_line.sup_alloc
+        %td= req_ord_line.req_remark
+        %td= req_ord_line.req_review_by
+        %td= req_ord_line.req_review_at
+        %td= req_ord_line.req_review_result
+        %td= req_ord_line.req_review_remark
+        %td= req_ord_line.req_approved_by
+        %td= req_ord_line.req_approved_at
+        %td= req_ord_line.req_approved_result
+        %td= req_ord_line.req_approved_remark
+        %td= req_ord_line.rcv_remark
+        %td= req_ord_line.rcv_review_by
+        %td= req_ord_line.rcv_review_at
+        %td= req_ord_line.rcv_review_result
+        %td= req_ord_line.rcv_review_remark
+        %td= req_ord_line.rcv_approved_by
+        %td= req_ord_line.rcv_approved_at
+        %td= req_ord_line.rcv_approved_result
+        %td= req_ord_line.rcv_approved_remark
+        %td= req_ord_line.creator
+        %td= req_ord_line.updater
+        %td= req_ord_line.create_ip
+        %td= req_ord_line.update_ip
+        %td= link_to 'Show', req_ord_line
+        %td= link_to 'Edit', edit_req_ord_line_path(req_ord_line)
+        %td= link_to 'Destroy', req_ord_line, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Req ord line', new_req_ord_line_path

@@ -1,0 +1,51 @@
+%h1 Listing flows
+
+%table
+  %thead
+    %tr
+      %th Uuid
+      %th Parent
+      %th Seq
+      %th Flow type
+      %th Notify at
+      %th Sign by
+      %th Sign at
+      %th Sign ip
+      %th Result
+      %th Remark
+      %th Assign
+      %th Assign by
+      %th Assign at
+      %th Status
+      %th Creator
+      %th Updater
+      %th
+      %th
+      %th
+
+  %tbody
+    - @flows.each do |flow|
+      %tr
+        %td= flow.uuid
+        %td= flow.parent_id
+        %td= flow.seq
+        %td= flow.flow_type
+        %td= flow.notify_at
+        %td= flow.sign_by
+        %td= flow.sign_at
+        %td= flow.sign_ip
+        %td= flow.result
+        %td= flow.remark
+        %td= flow.assign_id
+        %td= flow.assign_by
+        %td= flow.assign_at
+        %td= flow.status
+        %td= flow.creator
+        %td= flow.updater
+        %td= link_to 'Show', flow
+        %td= link_to 'Edit', edit_flow_path(flow)
+        %td= link_to 'Destroy', flow, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Flow', new_flow_path

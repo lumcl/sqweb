@@ -1,0 +1,25 @@
+= simple_form_for(@req_ord_sup) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :uuid
+    = f.input :req_ord_id
+    = f.input :lifnr
+    = f.input :sortl
+    = f.input :name1
+    = f.input :weark
+    = f.input :trading_type
+    = f.input :emails
+    = f.input :sent_at
+    = f.input :received_at
+    = f.input :open_by
+    = f.input :open_at
+    = f.input :open_ip
+    = f.input :reply_by
+    = f.input :reply_at
+    = f.input :reply_ip
+    = f.input :creator
+    = f.input :updater
+
+  .form-actions
+    = f.button :submit

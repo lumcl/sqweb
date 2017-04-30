@@ -1,0 +1,87 @@
+%p#notice= notice
+
+%p
+  %b Uuid:
+  = @req_ord_mat.uuid
+%p
+  %b Req ord:
+  = @req_ord_mat.req_ord_id
+%p
+  %b Seq:
+  = @req_ord_mat.seq
+%p
+  %b Matnr:
+  = @req_ord_mat.matnr
+%p
+  %b Maktx:
+  = @req_ord_mat.maktx
+%p
+  %b Remark:
+  = @req_ord_mat.remark
+%p
+  %b Status:
+  = @req_ord_mat.status
+%p
+  %b Meins:
+  = @req_ord_mat.meins
+%p
+  %b Target pct:
+  = @req_ord_mat.target_pct
+%p
+  %b Target prc:
+  = @req_ord_mat.target_prc
+%p
+  %b Vtweg prc:
+  = @req_ord_mat.vtweg_prc
+%p
+  %b Lowest prc:
+  = @req_ord_mat.lowest_prc
+%p
+  %b Ref matnr:
+  = @req_ord_mat.ref_matnr
+%p
+  %b Ref maktx:
+  = @req_ord_mat.ref_maktx
+%p
+  %b End customer:
+  = @req_ord_mat.end_customer
+%p
+  %b Prd app:
+  = @req_ord_mat.prd_app
+%p
+  %b Design no:
+  = @req_ord_mat.design_no
+%p
+  %b Pilot run date:
+  = @req_ord_mat.pilot_run_date
+%p
+  %b Mass prod date:
+  = @req_ord_mat.mass_prod_date
+%p
+  %b Forecast qty:
+  = @req_ord_mat.forecast_qty
+%p
+  %b Forecast uom:
+  = @req_ord_mat.forecast_uom
+%p
+  %b Drawing:
+  = @req_ord_mat.drawing
+%p
+  %b Order plant:
+  = @req_ord_mat.order_plant
+%p
+  %b Creator:
+  = @req_ord_mat.creator
+%p
+  %b Updater:
+  = @req_ord_mat.updater
+%p
+  %b Create ip:
+  = @req_ord_mat.create_ip
+%p
+  %b Update ip:
+  = @req_ord_mat.update_ip
+
+= link_to 'Edit', edit_req_ord_mat_path(@req_ord_mat)
+\|
+= link_to 'Back', req_ord_mats_path

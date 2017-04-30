@@ -1,0 +1,55 @@
+%h1 Listing req_ord_sups
+
+%table
+  %thead
+    %tr
+      %th Uuid
+      %th Req ord
+      %th Lifnr
+      %th Sortl
+      %th Name1
+      %th Weark
+      %th Trading type
+      %th Emails
+      %th Sent at
+      %th Received at
+      %th Open by
+      %th Open at
+      %th Open ip
+      %th Reply by
+      %th Reply at
+      %th Reply ip
+      %th Creator
+      %th Updater
+      %th
+      %th
+      %th
+
+  %tbody
+    - @req_ord_sups.each do |req_ord_sup|
+      %tr
+        %td= req_ord_sup.uuid
+        %td= req_ord_sup.req_ord_id
+        %td= req_ord_sup.lifnr
+        %td= req_ord_sup.sortl
+        %td= req_ord_sup.name1
+        %td= req_ord_sup.weark
+        %td= req_ord_sup.trading_type
+        %td= req_ord_sup.emails
+        %td= req_ord_sup.sent_at
+        %td= req_ord_sup.received_at
+        %td= req_ord_sup.open_by
+        %td= req_ord_sup.open_at
+        %td= req_ord_sup.open_ip
+        %td= req_ord_sup.reply_by
+        %td= req_ord_sup.reply_at
+        %td= req_ord_sup.reply_ip
+        %td= req_ord_sup.creator
+        %td= req_ord_sup.updater
+        %td= link_to 'Show', req_ord_sup
+        %td= link_to 'Edit', edit_req_ord_sup_path(req_ord_sup)
+        %td= link_to 'Destroy', req_ord_sup, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Req ord sup', new_req_ord_sup_path

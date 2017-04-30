@@ -1,0 +1,54 @@
+= simple_form_for(@req_ord_line) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :uuid
+    = f.input :req_ord_id
+    = f.input :req_ord_sup_id
+    = f.input :req_ord_mat_id
+    = f.input :werks
+    = f.input :cur_prc
+    = f.input :cur_prc_conv
+    = f.input :cur_leadtime
+    = f.input :cur_moq
+    = f.input :sup_prc
+    = f.input :sup_prc_conv
+    = f.input :chg_pct
+    = f.input :sup_valid_from
+    = f.input :sup_valid_to
+    = f.input :sup_moq
+    = f.input :sup_leadtime
+    = f.input :sup_remark
+    = f.input :open_by
+    = f.input :open_at
+    = f.input :open_ip
+    = f.input :reply_by
+    = f.input :reply_at
+    = f.input :reply_ip
+    = f.input :cur_alloc
+    = f.input :sup_alloc
+    = f.input :req_remark
+    = f.input :req_review_by
+    = f.input :req_review_at
+    = f.input :req_review_result
+    = f.input :req_review_remark
+    = f.input :req_approved_by
+    = f.input :req_approved_at
+    = f.input :req_approved_result
+    = f.input :req_approved_remark
+    = f.input :rcv_remark
+    = f.input :rcv_review_by
+    = f.input :rcv_review_at
+    = f.input :rcv_review_result
+    = f.input :rcv_review_remark
+    = f.input :rcv_approved_by
+    = f.input :rcv_approved_at
+    = f.input :rcv_approved_result
+    = f.input :rcv_approved_remark
+    = f.input :creator
+    = f.input :updater
+    = f.input :create_ip
+    = f.input :update_ip
+
+  .form-actions
+    = f.button :submit
